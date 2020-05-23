@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyA1SaisrSiQ8NSYCE1LABJTT_Zxf43Cq60",
+    authDomain: "maintance-strava.firebaseapp.com",
+    databaseURL: "https://maintance-strava.firebaseio.com",
+    projectId: "maintance-strava",
+    storageBucket: "maintance-strava.appspot.com",
+    messagingSenderId: "878034168275",
+    appId: "1:878034168275:web:22ef570d2ec9fb1cf26726"
+  }
 };
 
 /*

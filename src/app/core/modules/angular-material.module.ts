@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button'; 
+import { MatSliderModule } from '@angular/material/slider';
 
 const declarations = [
     
@@ -10,13 +11,14 @@ const exports = [
 ];
 
 const imports = [
-    MatButtonModule
+    MatButtonModule,
+    MatSliderModule
 ];
 
 
 @NgModule({
     declarations: [],
-    exports: [],
+    exports: [...imports],
     imports: [...imports]
 })
 export class AngularMaterialModule {}

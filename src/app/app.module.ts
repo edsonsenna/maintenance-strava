@@ -1,23 +1,39 @@
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule} from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { AngularMaterialModule } from './core/modules/angular-material.module';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { environment } from '../environments/environment';
+import { LoginComponent } from './core/components/login/login.component';
+import { HomeComponent } from './core/components/home/home.component';
+
+const declarations = [
+  AppComponent,
+  LoginComponent
+]
+
+const imports = [
+  AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFirestoreModule,
+  AngularMaterialModule,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  BrowserModule,
+  HttpClientModule
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    ...declarations,
+    HomeComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatButtonModule
+    ...imports
   ],
   providers: [],
   bootstrap: [AppComponent]

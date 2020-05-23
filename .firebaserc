@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "maintance-strava": {
+      "hosting": {
+        "maintenance-strava": [
+          "maintance-strava"
+        ]
+      }
+    }
+  }
+}
