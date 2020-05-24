@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
 import { StravaAuthService } from '../../services/strava-auth.service';
@@ -30,9 +30,9 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     this.receiveQueryParams();
-    this.getUserToken();
-    this.findUser();
-    await this.createOrUpdateUser();
+    await this.getUserToken();
+    await this.findUser();
+    //await this.createOrUpdateUser();
   }
 
   receiveQueryParams() {
@@ -46,23 +46,34 @@ export class HomeComponent implements OnInit {
 
   }
 
-  getUserToken() {
+  async getUserToken() {
     if(this.userCode) {
-      this.stravaAuth
-        .getAuthToken(this.userCode)
-        .subscribe((response: TokenResponse) => {
+      const receiveTokenReponse = {
+        next: (response: TokenResponse) => {
           if(response.access_token && response.expires_in) {
             this.cookieService.set('AUTH_TOKEN', response.access_token, response.expires_in, '/');
           }
           if(response.athlete) {
-            this.athlete = this.athlete;
+            this.athlete = response.athlete;
           }
-        }) 
+          console.log(response);
+          console.log(this.athlete);
+        }
+      }
+      return await this.stravaAuth
+        .getAuthToken(this.userCode)
+        .pipe(tap(receiveTokenReponse))
+        .toPromise()
+        .then(() => true)
+        .catch(() => false);
     }
+
+    return Promise.resolve(false);
   }
 
-  findUser() {
-
+  async findUser() {
+    this.user = await this.userService.findUserById(this.athlete.id);
+    console.log('User by Id', this.user);
   }
 
   async createOrUpdateUser() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 
 import { User } from '../interfaces/user';
 
@@ -24,10 +24,21 @@ export class UserService {
             })
     }
 
-    async findUserById(id: string): Promise<User> {
-        let user: User = null;
-
-        return null;
+    async findUserById(id: number): Promise<User> {
+        return await this.firestore
+            .collection(COLLECTION_USERS, ref => ref.where('athlete.id', '==', id))
+            .get()
+            .toPromise()
+            .then(docs => {
+                let user: DocumentData = null;
+                docs.forEach(doc => {
+                    if(!user && doc.id && doc.data()) {
+                        user = doc.data();
+                    }
+                })
+                return user;
+            })
+            .catch(_ => null);
     }
 
     
