@@ -13,7 +13,8 @@ export class UserService {
     async createUser(user: User): Promise<boolean> {
         return await this.firestore
             .collection(COLLECTION_USERS)
-            .add(user)
+            .doc(`${user.athlete.id}`)
+            .set(user)
             .then(res => {
                 console.log(res);
                 return true;
@@ -24,21 +25,22 @@ export class UserService {
             })
     }
 
-    async findUserById(id: number): Promise<User> {
-        return await this.firestore
-            .collection(COLLECTION_USERS, ref => ref.where('athlete.id', '==', id))
-            .get()
-            .toPromise()
-            .then(docs => {
-                let user: DocumentData = null;
-                docs.forEach(doc => {
-                    if(!user && doc.id && doc.data()) {
-                        user = doc.data();
-                    }
-                })
-                return user;
-            })
-            .catch(_ => null);
+    async findUserById(userId: string): Promise<User> {
+        let user:User = await this.firestore
+        .collection(COLLECTION_USERS)
+        .doc(userId)
+        .get()
+        .toPromise()
+        .then((doc) => 
+                doc.exists 
+                    ? <User>doc.data() 
+                    : null)
+        .catch(err => {
+            console.log('Erro ao buscar usuario ', err);
+            return null;
+        });
+
+        return user;
     }
 
     

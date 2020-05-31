@@ -8,12 +8,15 @@ import { TokenResponse } from '../../interfaces/token-response';
 import { Athlete } from '../../interfaces/athlete';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
+import { TokenService } from '../../services/token.service';
+
+const AUTH_TOKEN = 'ms-auth-token';
 
 @Component({
   selector: 'ms-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [StravaAuthService, UserService]
+  providers: [TokenService, StravaAuthService, UserService]
 })
 export class HomeComponent implements OnInit {
 
@@ -25,7 +28,8 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private stravaAuth: StravaAuthService,
     private cookieService: CookieService,
-    private userService: UserService
+    private userService: UserService,
+    private tokenService: TokenService
   ) { }
 
   async ngOnInit() {
@@ -52,10 +56,12 @@ export class HomeComponent implements OnInit {
         next: (response: TokenResponse) => {
           if(response.access_token && response.expires_in) {
             this.cookieService.set('AUTH_TOKEN', response.access_token, response.expires_in, '/');
+            localStorage.setItem(AUTH_TOKEN, response.access_token);
           }
           if(response.athlete) {
             this.athlete = response.athlete;
           }
+          this.tokenService.save(response);
           console.log(response);
           console.log(this.athlete);
         }
@@ -72,13 +78,12 @@ export class HomeComponent implements OnInit {
   }
 
   async findUser() {
-    this.user = await this.userService.findUserById(this.athlete.id);
+    this.user = await this.userService.findUserById(`${this.athlete.id}`);
     console.log('User by Id', this.user);
   }
 
   async createOrUpdateUser() {
     this.user = {
-      id: `${this.athlete.id}`,
       created: new Date(),
       update: new Date(),
       athlete: this.athlete
