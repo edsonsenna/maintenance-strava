@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { filter, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
-import { StravaAuthService } from '../../services/strava-auth.service';
+import { StravaService } from '../../services/strava.service';
 import { TokenResponse } from '../../interfaces/token-response';
 import { Athlete } from '../../interfaces/athlete';
 import { User } from '../../interfaces/user';
@@ -16,7 +16,7 @@ const AUTH_TOKEN = 'ms-auth-token';
   selector: 'ms-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [TokenService, StravaAuthService, UserService]
+  providers: [TokenService, StravaService, UserService]
 })
 export class HomeComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private stravaAuth: StravaAuthService,
+    private stravaAuth: StravaService,
     private cookieService: CookieService,
     private userService: UserService,
     private tokenService: TokenService
@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
       const receiveTokenReponse = {
         next: (response: TokenResponse) => {
           if(response.access_token && response.expires_in) {
-            this.cookieService.set('AUTH_TOKEN', response.access_token, response.expires_in, '/');
             localStorage.setItem(AUTH_TOKEN, response.access_token);
           }
           if(response.athlete) {

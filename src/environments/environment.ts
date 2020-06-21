@@ -7,7 +7,7 @@ import * as stravaConfig from '../stravaconfig.json';
 export const environment = {
   production: false,
   firebaseConfig: firebaseConfig.config,
-  stravaConfig
+  stravaConfig: stravaConfig.config
 };
 
 /*
