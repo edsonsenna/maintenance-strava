@@ -1,0 +1,11 @@
+{
+    "config": {
+        "apiKey": "YOUR-API-KEY",
+        "authDomain": "YOUR-FIREBASE-URL",
+        "databaseURL": "YOUR-DATABASE-URL",
+        "projectId": "YOUR-PROJECT-ID",
+        "storageBucket": "YOUR-BUCKET-URL",
+        "messagingSenderId": "YOUR-FCM-ID",
+        "appId": "YOUR-APP-ID"
+    }
+}

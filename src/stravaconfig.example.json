@@ -1,0 +1,6 @@
+{
+    "stravaUrl": "http://www.strava.com/oauth/",
+    "clientId": "YOUR-CLIENT-ID",
+    "clientSecret": "YOUR-CLIENT-SECRET",
+    "grantType": "grant_type=authorization_code"
+}

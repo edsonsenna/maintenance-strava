@@ -1,11 +1,13 @@
-import * as firebaseProps from '../firebaseconfig.json';
+import * as firebaseConfig from '../firebaseconfig.json';
+import * as stravaConfig from '../stravaconfig.json';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: false,
-  firebaseConfig: firebaseProps.config
+  firebaseConfig: firebaseConfig.config,
+  stravaConfig
 };
 
 /*

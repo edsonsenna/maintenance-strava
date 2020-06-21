@@ -4,8 +4,6 @@ import * as jwt from 'jwt-decode';
 import { TokenValues } from '../enums/token-values';
 import { TokenResponse } from '../interfaces/token-response';
 
-const AUTH_TOKEN = 'ms-auth-token';
-
 @Injectable()
 export class TokenService {
 

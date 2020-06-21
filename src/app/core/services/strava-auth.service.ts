@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
-const STRAVA_URL = 'http://www.strava.com/oauth/'
-const CLIENT_ID_PARAM = 'client_id=33524';
-const CLIENT_SECRET_PARAM = 'client_secret=4417fb89842153873e3a17c8c474b39454ecd272';
-const USER_CODE = 'code=';
-const GRANT_TYPE = 'grant_type=authorization_code';
+const STRAVA_URL = environment.stravaConfig.stravaUrl;
+const CLIENT_ID_PARAM = environment.stravaConfig.clientId;
+const CLIENT_SECRET_PARAM = environment.stravaConfig.clientSecret
+const GRANT_TYPE = environment.stravaConfig.grantType;
 
 @Injectable()
 export class StravaAuthService {
@@ -14,7 +14,7 @@ export class StravaAuthService {
 
     getAuthToken(userCode: string) {
         return this.http
-            .post(`${STRAVA_URL}token?${CLIENT_ID_PARAM}&${CLIENT_SECRET_PARAM}&${USER_CODE}${userCode}&${GRANT_TYPE}`, {});
+            .post(`${STRAVA_URL}token?client_id=${CLIENT_ID_PARAM}&client_secret${CLIENT_SECRET_PARAM}&code=${userCode}&${GRANT_TYPE}`, {});
     }
 
 }

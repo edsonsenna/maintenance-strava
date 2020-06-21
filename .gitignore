@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 
 /src/firebaseconfig.json
+/src/stravaconfig.json
