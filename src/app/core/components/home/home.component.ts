@@ -16,7 +16,7 @@ const AUTH_TOKEN = 'ms-auth-token';
   selector: 'ms-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [TokenService, StravaService, UserService]
+  providers: [StravaService, UserService]
 })
 export class HomeComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private stravaAuth: StravaService,
+    private stravaService: StravaService,
     private cookieService: CookieService,
     private userService: UserService,
     private tokenService: TokenService
@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
         next: (response: TokenResponse) => {
           if(response.access_token && response.expires_in) {
             localStorage.setItem(AUTH_TOKEN, response.access_token);
+            this.getUserInfo();
           }
           if(response.athlete) {
             this.athlete = response.athlete;
@@ -65,23 +66,48 @@ export class HomeComponent implements OnInit {
           console.log(this.athlete);
         }
       }
-      return await this.stravaAuth
+      return await this.stravaService
         .getAuthToken(this.userCode)
         .pipe(tap(receiveTokenReponse))
         .toPromise()
         .then(() => true)
         .catch(() => false);
+    } else {
+      this.getUserInfo();
     }
 
     return Promise.resolve(false);
   }
 
-  async findUser() {
-    this.user = await this.userService.findUserById(`${this.athlete.id}`);
-    console.log('User by Id', this.user);
+  async getUserInfo() {
+    const receiveUser = {
+      next: (user) => {
+        console.log('User ', user);
+        if(user) {
+          this.updateUser(user.id, user.bikes);
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    }
+
+    return await this.stravaService
+        .getAuthenticadedUser()
+        .pipe(tap(receiveUser))
+        .toPromise()
+        .then(() => true)
+        .catch(() => false);
   }
 
-  async createOrUpdateUser() {
+  async findUser() {
+    if(this.athlete) {
+      this.user = await this.userService.findUserById(`${this.athlete.id}`);
+      console.log('User by Id', this.user);
+    }
+  }
+
+  async createUser() {
     this.user = {
       created: new Date(),
       update: new Date(),
@@ -90,6 +116,10 @@ export class HomeComponent implements OnInit {
 
     const userCreated = await this.userService.createUser(this.user);
     console.log('Creating' + userCreated);
+  }
+
+  async updateUser(userId: string, bikes: []) {
+    await this.userService.updateUser(userId, bikes);
   }
 
 }

@@ -42,5 +42,19 @@ export class UserService {
 
         return user;
     }
+
+    async updateUser(userId: string, bikes: []): Promise<boolean> {
+
+        return await this.firestore
+        .collection(COLLECTION_USERS)
+        .doc(`${userId}`)
+        .update({
+            "bikes": bikes
+        })
+        .then(() => true)
+        .catch(() => false);
+
+        
+    }
     
 }

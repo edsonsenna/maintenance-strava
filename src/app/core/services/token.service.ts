@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import * as jwt from 'jwt-decode';
+
 import { TokenValues } from '../enums/token-values';
 import { TokenResponse } from '../interfaces/token-response';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class TokenService {
 
-    constructor(private cookieService: CookieService) {}
+    constructor() {}
 
     get token() {
         return localStorage.getItem(TokenValues.TOKEN_KEY);
@@ -25,10 +26,14 @@ export class TokenService {
     }
 
     get isTokenValid() {
-        const tokenExp = localStorage.getItem(TokenValues.EXP_DATE_KEY);
-        console.log('Seconds', tokenExp);
-        console.log(new Date(Number(tokenExp)));
-        return true;
+        const expDateMs = localStorage.getItem(TokenValues.EXP_DATE_KEY) || null;
+        if(expDateMs) {
+            const expDateString = Number(`${expDateMs}`.padEnd(13, '0'));
+            const expDate = new Date(expDateString);
+            return expDate.getTime() > Date.now();
+        }
+        return false;
     }
+
 
 }

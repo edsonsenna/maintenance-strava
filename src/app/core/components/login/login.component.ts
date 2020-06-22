@@ -15,7 +15,7 @@ const STRAVA_FULL_URL = `${STRAVA_URL}authorize?client_id=${CLIENT_ID_PARAM}&res
   selector: 'ms-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [StravaService, TokenService]
+  providers: [StravaService]
 })
 export class LoginComponent implements OnInit {
 
@@ -24,33 +24,11 @@ export class LoginComponent implements OnInit {
     private tokenService: TokenService
   ) { }
 
-  async ngOnInit(): Promise<boolean> {
-    console.log(this.verifyHasToken());
-    if(this.verifyHasToken()) {
-      const receiveUser = {
-        next: (user) => {
-          console.log('User ', user);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      }
-
-      return await this.stravaService
-          .getAuthenticadedUser()
-          .pipe(tap(receiveUser))
-          .toPromise()
-          .then(() => true)
-          .catch(() => false);
-    }
-  }
+  ngOnInit(): void { }
 
   onLoginButtonClick() {
     window.open(STRAVA_FULL_URL);
   }
 
-  verifyHasToken() {
-    return this.tokenService.hasToken;
-  }
 
 }
