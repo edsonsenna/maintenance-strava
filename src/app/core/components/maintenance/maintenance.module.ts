@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaintenanceListComponent } from './maintenance-list/maintenance-list.component';
 import { MaintenanceFormComponent } from './maintenance-form/maintenance-form.component';
 import { AngularMaterialModule } from '../../modules/angular-material.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const declarations = [
   MaintenanceFormComponent,
@@ -14,7 +16,9 @@ const declarations = [
 const imports = [
   CommonModule,
   AngularMaterialModule,
-  BrowserAnimationsModule
+  BrowserAnimationsModule,
+  ReactiveFormsModule,
+  RouterModule
 ]
 
 
