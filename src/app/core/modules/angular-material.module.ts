@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button'; 
+import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 const declarations = [
-    
+
 ];
 
 const exports = [
@@ -12,13 +18,19 @@ const exports = [
 
 const imports = [
     MatButtonModule,
-    MatSliderModule
+    MatMenuModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule
 ];
 
 
 @NgModule({
     declarations: [],
+    imports: [...imports],
     exports: [...imports],
-    imports: [...imports]
 })
-export class AngularMaterialModule {}
+export class AngularMaterialModule { }

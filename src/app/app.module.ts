@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './core/components/login/login.component';
 import { HomeComponent } from './core/components/home/home.component';
 import { HttpIntercept } from './core/interceptors/http-intercept.interceptor';
+import { MaintenanceModule } from './core/components/maintenance/maintenance.module';
 
 const declarations = [
   AppComponent,
@@ -26,6 +27,7 @@ const imports = [
   AppRoutingModule,
   BrowserAnimationsModule,
   BrowserModule,
+  MaintenanceModule,
   HttpClientModule
 ]
 
