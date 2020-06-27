@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaintenanceListComponent } from './maintenance-list/maintenance-list.component';
 import { MaintenanceFormComponent } from './maintenance-form/maintenance-form.component';
 import { AngularMaterialModule } from '../../modules/angular-material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const declarations = [
   MaintenanceFormComponent,
@@ -18,7 +19,8 @@ const imports = [
   AngularMaterialModule,
   BrowserAnimationsModule,
   ReactiveFormsModule,
-  RouterModule
+  RouterModule,
+  TranslateModule.forChild()
 ]
 
 

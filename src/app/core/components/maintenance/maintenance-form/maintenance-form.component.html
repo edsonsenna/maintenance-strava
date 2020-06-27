@@ -2,7 +2,7 @@
     <div class="form" *ngIf="this.form">
         <form [formGroup]="this.form">
             <mat-card class="example-card">
-                <mat-card-title>Create Maintenance</mat-card-title>
+                <mat-card-title>{{ 'maintenance.create.title' | translate }}</mat-card-title>
                 <mat-card-content>
                     <mat-form-field appearance="outline">
                         <mat-label>Name</mat-label>
