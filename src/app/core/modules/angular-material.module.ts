@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 const declarations = [
 
@@ -19,14 +20,15 @@ const exports = [
 
 const imports = [
     MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
     MatMenuModule,
+    MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
     MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    MatInputModule,
 ];
 
 

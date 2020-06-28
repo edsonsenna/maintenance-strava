@@ -1,4 +1,19 @@
-.content > .title {
-    font-size: 24px;
-    margin-bottom: 12px;
+
+.content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-card {
+    width: 50%;
+    min-width: 320px;
+}
+
+.mat-card-title {
+    margin-bottom: 25px;
+}
+
+.full-field {
+    width: 90%;
 }

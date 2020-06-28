@@ -6,6 +6,8 @@ import { HomeComponent } from './core/components/home/home.component';
 import { LoginGuard } from './core/guards/login.guard';
 import { MaintenanceListComponent } from './core/components/maintenance/maintenance-list/maintenance-list.component';
 import { MaintenanceFormComponent } from './core/components/maintenance/maintenance-form/maintenance-form.component';
+import { EquipmentResolver } from './core/resolvers/equipment.resolver';
+import { StravaService } from './core/services/strava.service';
 
 
 const routes: Routes = [
@@ -24,7 +26,10 @@ const routes: Routes = [
   },
   {
     path: 'maintenance/create',
-    component: MaintenanceFormComponent
+    component: MaintenanceFormComponent,
+    resolve: {
+      equipments: EquipmentResolver
+    }
   },
   {
     path: '**',
@@ -35,6 +40,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [StravaService]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,14 @@
+{
+    "values": {
+        "types": [
+            {
+                "name": "distance",
+                "value": "distance"
+            },
+            {
+                "name": "time",
+                "value": "time"
+            }
+        ]
+    }
+}

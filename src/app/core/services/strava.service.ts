@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
+import { tap } from 'rxjs/operators';
 
 
 const STRAVA_AUTH_URL = environment.stravaConfig.stravaAuthUrl;
@@ -23,6 +24,14 @@ export class StravaService {
     getAuthenticadedUser() {
         return this.http
             .get(`${STRAVA_API_URL}/athlete`);
+    }
+
+    async getAuthenticadedUserBikes() {
+        return await this.http
+            .get(`${STRAVA_API_URL}/athlete`)
+            .toPromise().then((user:any) => {
+                return user?.bikes ? user.bikes : [];
+            });
     }
 
 }

@@ -1,0 +1,20 @@
+{
+    "maintenance": {
+        "create": {
+            "title": "Create New Maintenance"
+        }
+    },
+    "shared": {
+        "buttons": {
+            "create": "Create",
+            "update": "Update",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "back": "Back"
+        },
+        "placeholders": {
+            "bikes": "Bikes",
+            "equipmentDistance": "Equipment Distance"
+        }
+    }
+}

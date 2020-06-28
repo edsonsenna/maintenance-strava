@@ -3,7 +3,7 @@
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="app-name">Responsive App</h1>
+        <h1 class="app-name">{{ this.title }}</h1>
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
@@ -15,6 +15,9 @@
         </mat-sidenav>
 
         <mat-sidenav-content>
+            <div class="loader" *ngIf="isLoader">
+                <div>Loading...</div>
+              </div>
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

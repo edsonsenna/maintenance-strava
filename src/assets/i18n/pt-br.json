@@ -1,7 +1,24 @@
 {
     "maintenance": {
         "create": {
-            "title": "Criar nova manutenção"
+            "title": "Criar Nova Manutenção",
+            "types": {
+                "distance": "Distância",
+                "date": "Data"
+            }
+        }
+    },
+    "shared": {
+        "buttons": {
+            "create": "Criar",
+            "update": "Atualizar",
+            "delete": "Excluir",
+            "cancel": "Cancelar",
+            "back": "Voltar"
+        },
+        "placeholders": {
+            "bikes": "Bicicletas",
+            "equipmentDistance": "Quilometragem do Equipamento"
         }
     }
 }
