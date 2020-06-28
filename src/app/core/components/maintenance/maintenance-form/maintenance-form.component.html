@@ -3,21 +3,32 @@
         <mat-card-title>{{ 'maintenance.create.title' | translate }}</mat-card-title>
         <mat-card-content>
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.placeholders.bikes' | translate}}</mat-label>
+                <mat-label>{{ 'shared.inputTitles.bikes' | translate}}</mat-label>
                 <mat-select formControlName="equipmentId" (selectionChange)="onEquipmentSelect();">
                     <mat-option *ngFor="let equipment of equipments" [value]="equipment.id">{{ equipment.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.placeholders.equipmentDistance' | translate}}</mat-label>
+                <mat-label>{{ 'shared.inputTitles.equipmentDistance' | translate}}</mat-label>
                 <input matInput formControlName="equipmentDistance">
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Ex. California">
+                <mat-label>{{ 'shared.inputTitles.maintenanceType' | translate}}</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of types" [value]="type.value">
+                        {{ 'maintenance.create.types.' + type.name | translate }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
-            
+            <mat-form-field appearance="outline" class="full-field">
+                <mat-label>{{ 'shared.inputTitles.name' | translate}}</mat-label>
+                <input matInput placeholder="{{ 'shared.placeholders.maintenanceName' | translate }}">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-field">
+                <mat-label>{{ 'shared.inputTitles.maintenanceGoal' | translate}}</mat-label>
+                <input matInput formControlName="maintenanceGoal">
+            </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary">{{ 'shared.buttons.create' | translate }}</button>

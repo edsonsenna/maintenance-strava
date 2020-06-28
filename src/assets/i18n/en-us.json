@@ -1,7 +1,11 @@
 {
     "maintenance": {
         "create": {
-            "title": "Create New Maintenance"
+            "title": "Create New Maintenance",
+            "types": {
+                "distance": "Distance",
+                "date": "Date"
+            }
         }
     },
     "shared": {
@@ -12,9 +16,15 @@
             "cancel": "Cancel",
             "back": "Back"
         },
-        "placeholders": {
+        "inputTitles": {
             "bikes": "Bikes",
-            "equipmentDistance": "Equipment Distance"
+            "equipmentDistance": "Equipment Distance",
+            "maintenanceType": "Maintenance Type",
+            "maintenanceGoal": "Change Distance",
+            "name": "Name"
+        },
+        "placeholders": {
+            "maintenanceName": "Ex. Chain Change"
         }
     }
 }

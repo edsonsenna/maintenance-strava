@@ -6,8 +6,8 @@
                 "value": "distance"
             },
             {
-                "name": "time",
-                "value": "time"
+                "name": "date",
+                "value": "date"
             }
         ]
     }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import * as MaintenanceValues from "../../../mocks/maintenance-values.json";
+
 @Component({
   selector: 'ms-maintenance-form',
   templateUrl: './maintenance-form.component.html',
@@ -11,6 +13,8 @@ export class MaintenanceFormComponent implements OnInit {
 
   private maintenanceForm: FormGroup = null;
   private equipmentsArr: any[] = [];
+  
+  public types: any[] = MaintenanceValues.values.types;
 
   constructor(
     private _formBuilder: FormBuilder,

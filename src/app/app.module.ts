@@ -62,6 +62,6 @@ export class AppModule {
   constructor(private translateService: TranslateService) {
     // TODO: Get user client language as default language 
     translateService.setDefaultLang('pt-br');
-    translateService.use('pt-br');
+    translateService.use('en-us');
   }
 }

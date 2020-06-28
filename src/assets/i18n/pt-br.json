@@ -16,9 +16,15 @@
             "cancel": "Cancelar",
             "back": "Voltar"
         },
-        "placeholders": {
+        "inputTitles": {
             "bikes": "Bicicletas",
-            "equipmentDistance": "Quilometragem do Equipamento"
+            "equipmentDistance": "Quilometragem do Equipamento",
+            "maintenanceType": "Tipo da Manutenção",
+            "maintenanceGoal": "Quilometragem de Troca",
+            "name": "Nome"
+        },
+        "placeholders": {
+            "maintenanceName": "Ex. Troca da Corrente"
         }
     }
 }
