@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { User } from '../interfaces/user';
 
@@ -8,10 +8,10 @@ const COLLECTION_USERS = 'users';
 @Injectable()
 export class UserService {
 
-    constructor(private firestore: AngularFirestore) {}
+    constructor(private _firestore: AngularFirestore) {}
 
     async createUser(user: User): Promise<boolean> {
-        return await this.firestore
+        return await this._firestore
             .collection(COLLECTION_USERS)
             .doc(`${user.athlete.id}`)
             .set(user)
@@ -26,7 +26,7 @@ export class UserService {
     }
 
     async findUserById(userId: string): Promise<User> {
-        let user:User = await this.firestore
+        let user:User = await this._firestore
         .collection(COLLECTION_USERS)
         .doc(userId)
         .get()
@@ -45,7 +45,7 @@ export class UserService {
 
     async updateUser(userId: string, bikes: []): Promise<boolean> {
 
-        return await this.firestore
+        return await this._firestore
         .collection(COLLECTION_USERS)
         .doc(`${userId}`)
         .update({

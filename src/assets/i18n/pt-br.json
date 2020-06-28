@@ -25,6 +25,9 @@
         },
         "placeholders": {
             "maintenanceName": "Ex. Troca da Corrente"
+        },
+        "errors": {
+            "required": "*Campo obrigatório."
         }
     }
 }

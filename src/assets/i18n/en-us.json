@@ -25,6 +25,9 @@
         },
         "placeholders": {
             "maintenanceName": "Ex. Chain Change"
+        },
+        "errors": {
+            "required": "*Required field."
         }
     }
 }

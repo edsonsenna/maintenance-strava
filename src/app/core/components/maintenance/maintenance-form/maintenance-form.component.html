@@ -8,6 +8,7 @@
                     <mat-option *ngFor="let equipment of equipments" [value]="equipment.id">{{ equipment.name }}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="this.equipment.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.equipmentDistance' | translate}}</mat-label>
@@ -20,18 +21,21 @@
                         {{ 'maintenance.create.types.' + type.name | translate }}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="this.type.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.name' | translate}}</mat-label>
-                <input matInput placeholder="{{ 'shared.placeholders.maintenanceName' | translate }}">
+                <input matInput formControlName="name" placeholder="{{ 'shared.placeholders.maintenanceName' | translate }}">
+                <mat-error *ngIf="this.name.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenanceGoal' | translate}}</mat-label>
                 <input matInput formControlName="maintenanceGoal">
+                <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary">{{ 'shared.buttons.create' | translate }}</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'shared.buttons.create' | translate }}</button>
             <button mat-raised-button>{{  'shared.buttons.cancel' | translate }}</button>
         </mat-card-actions>
     </mat-card>
