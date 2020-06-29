@@ -3,20 +3,20 @@
         My Maintenances
     </div>
     <div class="new-button">
-        <button mat-raised-button color="primary" routerLink="/maintenance/create">New +</button>
+        <button mat-raised-button color="primary" routerLink="/maintenance/create">{{ 'shared.buttons.create' | translate}}</button>
     </div>
     <div class="list">
         <mat-card class="card" *ngFor="let maintenance of maintenances | async">
             <mat-card-title>{{ maintenance.name }} </mat-card-title>
             <mat-card-content>
               <div>
-                Behavior: {{ maintenance.name}}
+                Equipment: {{ maintenance?.equipmentName}}
               </div>
               <div>
-                Goal: {{ (maintenance.maintenanceGoal / 1000) | mask:'separator.2':'.'}} Km
+                Goal: {{ (maintenance?.maintenanceGoal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
               </div>
               <div>
-                Used: {{ (maintenance.value / 1000) | mask:'separator.2':'.' }} Km
+                Used: {{ (maintenance?.value / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
               </div>
             </mat-card-content>
           </mat-card>

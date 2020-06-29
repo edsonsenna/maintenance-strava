@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import * as MaintenanceValues from "../../../mocks/maintenance-values.json";
 import { TokenService } from '../../../services/token.service';
@@ -11,7 +12,7 @@ import { Maintenance } from '../../../interfaces/maintenance';
   selector: 'ms-maintenance-form',
   templateUrl: './maintenance-form.component.html',
   styleUrls: ['./maintenance-form.component.css'],
-  providers: [MaintenanceService, TokenService]
+  providers: [MaintenanceService, TokenService, {provide: MAT_DATE_LOCALE, useValue: 'pt'},]
 })
 export class MaintenanceFormComponent implements OnInit {
 
@@ -27,7 +28,6 @@ export class MaintenanceFormComponent implements OnInit {
     private _tokenService: TokenService,
     private _maintenanceService: MaintenanceService,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -43,6 +43,7 @@ export class MaintenanceFormComponent implements OnInit {
       type: [null, Validators.required],
       equipmentId: [null, Validators.required],
       equipmentDistance: [{ value: null, disabled: true}, Validators.required],
+      equipmentName: [{ value: null, disabled: true}, Validators.required],
       maintenanceGoal: [null, Validators.required],
       value: [0]
     });
@@ -53,7 +54,7 @@ export class MaintenanceFormComponent implements OnInit {
   getAndParseEquipments() {
     this.equipmentsArr = this._route.snapshot.data["equipments"] || [];
     this.equipmentsArr = this.equipmentsArr.map(equipment => {
-      equipment.distance /= 1000;
+      equipment.distance = (equipment.distance / 1000).toFixed(0);
       return equipment;
     });
     console.log(this.equipmentsArr);
@@ -63,6 +64,8 @@ export class MaintenanceFormComponent implements OnInit {
     const equipment = this.equipmentsArr.find(equipment => equipment.id === this.equipment.value) || null;
     this.equipmentDistance.setValue(equipment?.distance ? equipment.distance : null);
     this.equipmentDistance.updateValueAndValidity();
+    this.equipmentName.setValue(equipment?.name ? equipment.name : null);
+    this.equipmentName.updateValueAndValidity();
   }
 
   async onSubmit() {
@@ -102,6 +105,10 @@ export class MaintenanceFormComponent implements OnInit {
 
   get equipmentDistance() {
     return this.maintenanceForm?.get('equipmentDistance') || null;
+  }
+
+  get equipmentName() {
+    return this.maintenanceForm?.get('equipmentName') || null;
   }
 
   get maintenanceGoal() {

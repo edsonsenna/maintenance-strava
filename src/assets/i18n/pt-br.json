@@ -21,6 +21,7 @@
             "equipmentDistance": "Quilometragem do Equipamento",
             "maintenanceType": "Tipo da Manutenção",
             "maintenanceGoal": "Quilometragem de Troca",
+            "maintenanceDate": "Data de Troca",
             "name": "Nome"
         },
         "placeholders": {

@@ -12,7 +12,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.equipmentDistance' | translate}}</mat-label>
-                <input matInput formControlName="equipmentDistance" mask="separator.2" thousandSeparator="." suffix=" Km">
+                <input matInput formControlName="equipmentDistance" mask="separator.0" thousandSeparator="." suffix=" Km">
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenanceType' | translate}}</mat-label>
@@ -30,9 +30,15 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenanceGoal' | translate}}</mat-label>
-                <input matInput formControlName="maintenanceGoal"  mask="separator.2" thousandSeparator="." suffix=" Km">
+                <input matInput formControlName="maintenanceGoal"  mask="separator.0" thousandSeparator="." suffix=" Km">
                 <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
+            <mat-form-field appearance="outline" class="full-field" *ngIf="false">
+                <mat-label>{{ 'shared.inputTitles.maintenanceDate' | translate}}</mat-label>
+                <input matInput [matDatepicker]="datePicker" readonly (click)="datePicker.open()">
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker disabled="false"></mat-datepicker>
+              </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'shared.buttons.create' | translate }}</button>

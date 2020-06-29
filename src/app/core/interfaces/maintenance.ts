@@ -2,6 +2,7 @@ export interface Maintenance {
     id: string;
     equipmentId: string;
     equipmentDistance: number;
+    equipmentName: string;
     maintenanceGoal: number;
     type: string;
     value: number;

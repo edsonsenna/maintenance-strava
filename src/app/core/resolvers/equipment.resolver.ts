@@ -1,5 +1,6 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
+
 import { StravaService } from '../services/strava.service';
 
 @Injectable({ providedIn: 'root' })

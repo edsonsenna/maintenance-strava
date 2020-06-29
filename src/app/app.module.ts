@@ -11,16 +11,12 @@ import { AngularMaterialModule } from './core/modules/angular-material.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
-import { LoginComponent } from './core/components/login/login.component';
-import { HomeComponent } from './core/components/home/home.component';
 import { HttpIntercept } from './core/interceptors/http-intercept.interceptor';
 import { MaintenanceModule } from './core/components/maintenance/maintenance.module';
 import { HttpLoaderFactory } from './core/loaders/http-i18n-loader';
 
 const declarations = [
-  AppComponent,
-  LoginComponent,
-  HomeComponent
+  AppComponent
 ]
 
 const imports = [

@@ -21,6 +21,7 @@
             "equipmentDistance": "Equipment Distance",
             "maintenanceType": "Maintenance Type",
             "maintenanceGoal": "Change Distance",
+            "maintenanceDate": "Change Date",
             "name": "Name"
         },
         "placeholders": {

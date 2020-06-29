@@ -18,7 +18,6 @@ const declarations = [
 const imports = [
   CommonModule,
   AngularMaterialModule,
-  BrowserAnimationsModule,
   ReactiveFormsModule,
   RouterModule,
   TranslateModule.forChild(),
