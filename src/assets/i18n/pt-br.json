@@ -6,6 +6,9 @@
                 "distance": "Distância",
                 "date": "Data"
             }
+        },
+        "list": {
+            "title": "Minhas Manutenções"
         }
     },
     "shared": {

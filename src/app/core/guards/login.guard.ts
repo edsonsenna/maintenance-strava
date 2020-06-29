@@ -19,8 +19,9 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
+      console.log('Calling guard');
       return this.tokenService.isTokenValid 
-        ? this.router.createUrlTree(['/home'])
+        ? this.router.createUrlTree(['/maintenance'])
         : true;
   }
   

@@ -1,0 +1,26 @@
+.content {
+    padding: 16px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: middle;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-card {
+    width: 320px;
+    height: 280px;
+}
+
+.mat-card-title {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.mat-card-content {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
