@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as MaintenanceValues from "../../../mocks/maintenance-values.json";
 import { TokenService } from '../../../services/token.service';
@@ -25,14 +25,16 @@ export class MaintenanceFormComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _tokenService: TokenService,
-    private _maintenanceService: MaintenanceService
+    private _maintenanceService: MaintenanceService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
   ) { }
 
   async ngOnInit() {
     this.createReactiveForm();
     this.equipmentsArr = this._route.snapshot.data["equipments"] || [];
     console.log(this._tokenService.userId);
-    const res = await this._maintenanceService.getMaintenanceById(this._tokenService.userId, null);
+    const res = await this._maintenanceService.getMaintenanceById(this._tokenService.userId, '6dSp82Lzz9uIaclQ8iTH');
     console.log(res);
   }
 
@@ -44,7 +46,8 @@ export class MaintenanceFormComponent implements OnInit {
       type: [null, Validators.required],
       equipmentId: [null, Validators.required],
       equipmentDistance: [{ value: null, disabled: true}, Validators.required],
-      maintenanceGoal: [null, Validators.required]
+      maintenanceGoal: [null, Validators.required],
+      value: [0]
     });
 
     this.user.setValue(this._tokenService.userId);
@@ -67,7 +70,9 @@ export class MaintenanceFormComponent implements OnInit {
       name: this.name?.value || null
     };
 
-    await this._maintenanceService.createMaitenance(maintenance);
+    await this._maintenanceService.createMaitenance(this._tokenService.userId, maintenance);
+    console.log('Redirecionando!');
+    this._router.navigateByUrl('maintenance');
   }
 
   get form() {

@@ -13,8 +13,10 @@ export class MaintenanceService {
     ) {}
 
 
-    async createMaitenance(maintenance: Maintenance): Promise<boolean> {
+    async createMaitenance(userId: number, maintenance: Maintenance): Promise<boolean> {
         return await this._firestore
+            .collection(Collections.USERS)
+            .doc(`${userId}`)
             .collection(Collections.MAINTENANCES)
             .add(maintenance)
             .then(res => {
@@ -27,7 +29,21 @@ export class MaintenanceService {
             });
     }
 
-    async getMaintenanceById(userId: number, maintenanceId: number): Promise<Maintenance>  {
-        return null;
+    async getMaintenanceById(userId: number, maintenanceId: string): Promise<any>  {
+        return await this._firestore
+            .collection(Collections.USERS)
+            .doc(`${userId}`)
+            .collection(Collections.MAINTENANCES)
+            .get()
+            .toPromise()
+            .then(res => {
+                const arr = [];
+                res.forEach(doc => arr.push(doc.data()))
+                return arr;
+            },
+            err => {
+                console.log(err);
+                return false;
+            });
     }
 }

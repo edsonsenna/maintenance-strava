@@ -6,17 +6,17 @@
         <button mat-raised-button color="primary" routerLink="/maintenance/create">New +</button>
     </div>
     <div class="list">
-        <mat-card class="card" *ngFor="let maintenance of [1,2,3,4,5,6,7,8]">
-            <mat-card-title>Maintenance {{ maintenance}} </mat-card-title>
+        <mat-card class="card" *ngFor="let maintenance of maintenances | async">
+            <mat-card-title>{{ maintenance.name }} </mat-card-title>
             <mat-card-content>
               <div>
-                Behavior: Chain Change
+                Behavior: {{ maintenance.name}}
               </div>
               <div>
-                Goal: 2000km
+                Goal: {{ maintenance.maintenanceGoal }} m
               </div>
               <div>
-                Used: 1500km
+                Used: {{ maintenance.value }} m
               </div>
             </mat-card-content>
           </mat-card>
