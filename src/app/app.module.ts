@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { AngularMaterialModule } from './core/modules/angular-material.module';
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ const imports = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
     }
-})
+  }),
+  NgxMaskModule.forRoot(),
 ]
 
 const providers = [

@@ -13,10 +13,10 @@
                 Behavior: {{ maintenance.name}}
               </div>
               <div>
-                Goal: {{ maintenance.maintenanceGoal }} m
+                Goal: {{ (maintenance.maintenanceGoal / 1000) | mask:'separator.2':'.'}} Km
               </div>
               <div>
-                Used: {{ maintenance.value }} m
+                Used: {{ (maintenance.value / 1000) | mask:'separator.2':'.' }} Km
               </div>
             </mat-card-content>
           </mat-card>

@@ -12,7 +12,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.equipmentDistance' | translate}}</mat-label>
-                <input matInput formControlName="equipmentDistance">
+                <input matInput formControlName="equipmentDistance" mask="separator.2" thousandSeparator="." suffix=" Km">
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenanceType' | translate}}</mat-label>
@@ -30,7 +30,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenanceGoal' | translate}}</mat-label>
-                <input matInput formControlName="maintenanceGoal">
+                <input matInput formControlName="maintenanceGoal"  mask="separator.2" thousandSeparator="." suffix=" Km">
                 <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
         </mat-card-content>

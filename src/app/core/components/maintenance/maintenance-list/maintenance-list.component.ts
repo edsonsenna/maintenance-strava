@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { TokenService } from '../../../services/token.service';
-import { Collections } from 'src/app/core/enums/collections';
-import { map } from 'rxjs/operators';
+import { Collections } from '../../../enums/collections';
+import { Maintenance } from '../../../interfaces/maintenance';
 
 @Component({
   selector: 'ms-maintenance-list',
@@ -13,7 +13,8 @@ import { map } from 'rxjs/operators';
 })
 export class MaintenanceListComponent implements OnInit {
 
-  public maintenances = null;
+  private maintenanceCollection: AngularFirestoreCollection<Maintenance> = null
+  public maintenances: Observable<Maintenance[]> = null;
 
   constructor(
     private _firestore: AngularFirestore,
@@ -21,11 +22,15 @@ export class MaintenanceListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.maintenances = this._firestore
-        .collection(Collections.USERS)
-        .doc(`${this._tokenService.userId}`)
-        .collection(Collections.MAINTENANCES)
-        .valueChanges();
+    this.getMaintenances();
+  }
+
+  getMaintenances() {
+    this.maintenanceCollection = this._firestore
+      .collection(Collections.USERS)
+      .doc(`${this._tokenService.userId}`)
+      .collection(Collections.MAINTENANCES);
+    this.maintenances = this.maintenanceCollection.valueChanges();
   }
 
 }

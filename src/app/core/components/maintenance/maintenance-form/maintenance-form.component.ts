@@ -30,12 +30,9 @@ export class MaintenanceFormComponent implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.createReactiveForm();
-    this.equipmentsArr = this._route.snapshot.data["equipments"] || [];
-    console.log(this._tokenService.userId);
-    const res = await this._maintenanceService.getMaintenanceById(this._tokenService.userId, '6dSp82Lzz9uIaclQ8iTH');
-    console.log(res);
+    this.getAndParseEquipments();
   }
 
   createReactiveForm() {
@@ -53,6 +50,15 @@ export class MaintenanceFormComponent implements OnInit {
     this.user.setValue(this._tokenService.userId);
   }
 
+  getAndParseEquipments() {
+    this.equipmentsArr = this._route.snapshot.data["equipments"] || [];
+    this.equipmentsArr = this.equipmentsArr.map(equipment => {
+      equipment.distance /= 1000;
+      return equipment;
+    });
+    console.log(this.equipmentsArr);
+  }
+
   onEquipmentSelect() {
     const equipment = this.equipmentsArr.find(equipment => equipment.id === this.equipment.value) || null;
     this.equipmentDistance.setValue(equipment?.distance ? equipment.distance : null);
@@ -60,19 +66,18 @@ export class MaintenanceFormComponent implements OnInit {
   }
 
   async onSubmit() {
-    const maintenance: Maintenance = this.form.getRawValue();
-    const temp = {
-      equipmentId: this.equipment?.value || null,
-      initialValue: this.equipmentDistance?.value || null,
-      maxValue: this.maintenanceGoal?.value || null,
-      value: 0,
-      type: this.type?.value || null,
-      name: this.name?.value || null
-    };
-
-    await this._maintenanceService.createMaitenance(this._tokenService.userId, maintenance);
-    console.log('Redirecionando!');
-    this._router.navigateByUrl('maintenance');
+    if(this.form.valid) {
+      const maintenance: Maintenance = this.form.getRawValue();
+      if(!maintenance.id) delete maintenance.id;
+      maintenance.maintenanceGoal = Number(maintenance.maintenanceGoal * 1000);
+      maintenance.equipmentDistance = Number(maintenance.equipmentDistance * 1000);;
+      await this._maintenanceService.createMaitenance(this._tokenService.userId, maintenance);
+      this._router.navigateByUrl('maintenance');
+    } else {
+      this.form.markAllAsTouched();
+      return await Promise.resolve(false);
+    }
+    
   }
 
   get form() {

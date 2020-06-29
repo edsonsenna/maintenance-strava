@@ -1,7 +1,8 @@
 export interface Maintenance {
+    id: string;
     equipmentId: string;
-    initialValue: number;
-    maxValue: number;
+    equipmentDistance: number;
+    maintenanceGoal: number;
     type: string;
     value: number;
     name: string;
