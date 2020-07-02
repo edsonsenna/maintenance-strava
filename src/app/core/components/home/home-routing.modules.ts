@@ -7,28 +7,48 @@ import { MaintenanceFormComponent } from '../maintenance/maintenance-form/mainte
 import { EquipmentResolver } from '../../resolvers/equipment.resolver';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent,
-        children: [
-            {
-                path: 'maintenance',
-                component: MaintenanceListComponent
-            },
-            {
-                path: 'maintenance/create',
-                component: MaintenanceFormComponent,
-                resolve: {
-                  equipments: EquipmentResolver
-                },
-              },
-        ]
-    }
-  ];
-  
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {
+        path: 'maintenance',
+        component: MaintenanceListComponent,
+      },
+      {
+        path: 'maintenance/create',
+        component: MaintenanceFormComponent,
+        resolve: {
+          equipments: EquipmentResolver,
+        },
+      },
+    ],
+  },
+];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-  })
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
 export class HomeRoutingModule {}
+
+// {
+//   path: '',
+//   children: [
+//       {
+//         path: 'home',
+//         component: HomeComponent
+//       },
+//       {
+//           path: 'maintenance',
+//           component: MaintenanceListComponent
+//       },
+//       {
+//           path: 'maintenance/create',
+//           component: MaintenanceFormComponent,
+//           resolve: {
+//             equipments: EquipmentResolver
+//           },
+//         },
+//   ]
+// }

@@ -9,7 +9,14 @@ import { TokenResponse } from '../interfaces/token-response';
 export class TokenService {
 
     constructor() {}
-
+    
+    save(tokenResponse: TokenResponse) {
+        localStorage.setItem(TokenValues.TOKEN_KEY, tokenResponse.access_token);
+        localStorage.setItem(TokenValues.EXP_DATE_KEY, JSON.stringify(tokenResponse.expires_at));
+        localStorage.setItem(TokenValues.REFRESH_KEY, tokenResponse.refresh_token);
+        localStorage.setItem(TokenValues.ATHLETE_INFO_KEY, JSON.stringify(tokenResponse.athlete));
+    }
+    
     get token() {
         return localStorage.getItem(TokenValues.TOKEN_KEY);
     }
@@ -19,12 +26,6 @@ export class TokenService {
         return user?.id ? user.id : null;
     }
 
-    save(tokenResponse: TokenResponse) {
-        localStorage.setItem(TokenValues.TOKEN_KEY, tokenResponse.access_token);
-        localStorage.setItem(TokenValues.EXP_DATE_KEY, JSON.stringify(tokenResponse.expires_at));
-        localStorage.setItem(TokenValues.REFRESH_KEY, tokenResponse.refresh_token);
-        localStorage.setItem(TokenValues.ATHLETE_INFO_KEY, JSON.stringify(tokenResponse.athlete));
-    }
 
     get hasToken() {
         return !!localStorage.getItem(TokenValues.TOKEN_KEY);

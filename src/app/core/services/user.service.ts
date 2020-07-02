@@ -56,5 +56,9 @@ export class UserService {
 
         
     }
+
+    async getRefreshToken(userId: string): Promise<boolean> {
+        return null;
+    }
     
 }

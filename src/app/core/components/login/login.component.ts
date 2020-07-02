@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 const STRAVA_URL = environment.stravaConfig.stravaAuthUrl;
 const CLIENT_ID_PARAM = environment.stravaConfig.clientId;
 
-const STRAVA_FULL_URL = `${STRAVA_URL}authorize?client_id=${CLIENT_ID_PARAM}&response_type=code&redirect_uri=http://localhost:4200/home&approval_prompt=force&scope=read_all,profile:read_all`;
+const STRAVA_FULL_URL = `${STRAVA_URL}authorize?client_id=${CLIENT_ID_PARAM}&response_type=code&redirect_uri=http://localhost:4200/login&approval_prompt=force&scope=read_all,profile:read_all`;
 
 @Component({
   selector: 'ms-login',
@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
     private tokenService: TokenService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    console.log('Init login');
+  }
 
   onLoginButtonClick() {
     window.open(STRAVA_FULL_URL);
