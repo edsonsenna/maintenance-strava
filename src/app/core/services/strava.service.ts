@@ -11,6 +11,7 @@ const STRAVA_API_URL = environment.stravaConfig.stravaBaseApiUrl;
 const CLIENT_ID_PARAM = environment.stravaConfig.clientId;
 const CLIENT_SECRET_PARAM = environment.stravaConfig.clientSecret
 const GRANT_TYPE = environment.stravaConfig.grantType;
+const GRANT_REFRESH_TYPE = environment.stravaConfig.grantRefreshType;
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,11 @@ export class StravaService {
     getAuthToken(userCode: string) {
         return this.http
             .post(`${STRAVA_AUTH_URL}token?client_id=${CLIENT_ID_PARAM}&client_secret=${CLIENT_SECRET_PARAM}&code=${userCode}&${GRANT_TYPE}`, {});
+    }
+
+    getAuthTokenByRefresh(refreshToken: string) {
+        return this.http
+            .post(`${STRAVA_AUTH_URL}token?client_id=${CLIENT_ID_PARAM}&client_secret=${CLIENT_SECRET_PARAM}&refresh_token=${refreshToken}&${GRANT_REFRESH_TYPE}`, {});
     }
 
     getAuthenticadedUser() {

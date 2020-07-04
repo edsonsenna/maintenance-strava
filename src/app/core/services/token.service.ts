@@ -11,12 +11,27 @@ export class TokenService {
     constructor() {}
     
     save(tokenResponse: TokenResponse) {
-        localStorage.setItem(TokenValues.TOKEN_KEY, tokenResponse.access_token);
-        localStorage.setItem(TokenValues.EXP_DATE_KEY, JSON.stringify(tokenResponse.expires_at));
-        localStorage.setItem(TokenValues.REFRESH_KEY, tokenResponse.refresh_token);
-        localStorage.setItem(TokenValues.ATHLETE_INFO_KEY, JSON.stringify(tokenResponse.athlete));
+        if(tokenResponse.access_token) {
+            localStorage.setItem(TokenValues.TOKEN_KEY, tokenResponse.access_token);
+        }
+        if(tokenResponse.expires_at) {
+            localStorage.setItem(TokenValues.EXP_DATE_KEY, JSON.stringify(tokenResponse.expires_at));
+        }
+        if(tokenResponse.refresh_token) {
+            localStorage.setItem(TokenValues.REFRESH_KEY, tokenResponse.refresh_token);
+        }
+        if(tokenResponse.athlete) {
+            localStorage.setItem(TokenValues.ATHLETE_INFO_KEY, JSON.stringify(tokenResponse.athlete));
+        }
     }
     
+    clearAllTokens() {
+        localStorage.removeItem(TokenValues.TOKEN_KEY);
+        localStorage.removeItem(TokenValues.EXP_DATE_KEY);
+        localStorage.removeItem(TokenValues.REFRESH_KEY);
+        localStorage.removeItem(TokenValues.ATHLETE_INFO_KEY);
+    }
+
     get token() {
         return localStorage.getItem(TokenValues.TOKEN_KEY);
     }
