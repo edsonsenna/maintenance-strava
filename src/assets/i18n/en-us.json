@@ -9,6 +9,17 @@
         },
         "list": {
             "title": "My Maintenances"
+        },
+        "card": {
+            "equipmentName": "Equipment Name",
+            "equipmentDistance": "Equipment Distance",
+            "distance": {
+                "actual": "Actual Distance",
+                "goal": "Goal Distance",
+                "initial": "Initial Distance",
+                "unit": "Km"
+            }
+
         }
     },
     "shared": {

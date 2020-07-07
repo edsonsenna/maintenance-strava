@@ -31,7 +31,7 @@ export class MaintenanceListComponent implements OnInit {
       .collection(Collections.USERS)
       .doc(`${this._tokenService.userId}`)
       .collection(Collections.MAINTENANCES);
-    this.maintenances = this.maintenanceCollection.valueChanges();
+    this.maintenances = this.maintenanceCollection.valueChanges({idField: 'id'});
   }
 
 }

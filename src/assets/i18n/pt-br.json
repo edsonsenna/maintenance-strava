@@ -9,6 +9,17 @@
         },
         "list": {
             "title": "Minhas Manutenções"
+        },
+        "card": {
+            "equipmentName": "Equipamento",
+            "equipmentDistance": "Quilometragem do Equipamento",
+            "distance": {
+                "actual": "Quilometragem Atual",
+                "goal": "Quilometragem Alvo",
+                "initial": "Quilometragem Inicial",
+                "unit": "Km"
+            }
+
         }
     },
     "shared": {

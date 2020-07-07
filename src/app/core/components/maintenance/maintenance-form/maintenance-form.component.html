@@ -41,8 +41,8 @@
               </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'shared.buttons.create' | translate }}</button>
-            <button mat-raised-button>{{  'shared.buttons.cancel' | translate }}</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'shared.buttons.' + (this.maintenance?.id ? 'update' : 'create') | translate }}</button>
+            <button mat-raised-button routerLink="/maintenance">{{  'shared.buttons.cancel' | translate }}</button>
         </mat-card-actions>
     </mat-card>
 </div>

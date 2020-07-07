@@ -6,20 +6,20 @@
         <button mat-raised-button color="primary" routerLink="/maintenance/create">{{ 'shared.buttons.create' | translate}}</button>
     </div>
     <div class="list">
-        <mat-card class="card" *ngFor="let maintenance of maintenances | async">
+        <mat-card class="card" *ngFor="let maintenance of maintenances | async" [routerLink]="'/maintenance/create/' + maintenance.id">
             <mat-card-title>{{ maintenance.name }} </mat-card-title>
             <mat-card-content>
               <div>
-                Equipment: {{ maintenance?.equipmentName }}
+                {{ 'maintenance.card.equipmentName' | translate }}: {{ maintenance?.equipmentName }}
               </div>
               <div>
-                Initial Distance: {{ (maintenance?.equipmentDistance / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+                {{ 'maintenance.card.distance.initial' | translate }}: {{ (maintenance?.equipmentDistance / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
               </div>
               <div>
-                Actual Distance: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
+                {{ 'maintenance.card.distance.actual' | translate }}: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
               </div>
               <div>
-                Goal Distance: {{ (maintenance?.maintenanceGoal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+                {{ 'maintenance.card.distance.goal' | translate }}: {{ (maintenance?.maintenanceGoal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
               </div>
             </mat-card-content>
           </mat-card>
