@@ -10,13 +10,16 @@
             <mat-card-title>{{ maintenance.name }} </mat-card-title>
             <mat-card-content>
               <div>
-                Equipment: {{ maintenance?.equipmentName}}
+                Equipment: {{ maintenance?.equipmentName }}
               </div>
               <div>
-                Goal: {{ (maintenance?.maintenanceGoal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+                Initial Distance: {{ (maintenance?.equipmentDistance / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
               </div>
               <div>
-                Used: {{ (maintenance?.value / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
+                Actual Distance: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
+              </div>
+              <div>
+                Goal Distance: {{ (maintenance?.maintenanceGoal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
               </div>
             </mat-card-content>
           </mat-card>

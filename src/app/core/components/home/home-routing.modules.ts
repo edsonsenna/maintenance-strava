@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { MaintenanceListComponent } from '../maintenance/maintenance-list/maintenance-list.component';
 import { MaintenanceFormComponent } from '../maintenance/maintenance-form/maintenance-form.component';
 import { EquipmentResolver } from '../../resolvers/equipment.resolver';
+import { MaintenanceResolver } from '../../resolvers/maintenance.resolver';
 
 const routes: Routes = [
   {
@@ -20,6 +21,14 @@ const routes: Routes = [
         component: MaintenanceFormComponent,
         resolve: {
           equipments: EquipmentResolver,
+        },
+      },
+      {
+        path: 'maintenance/create/:id',
+        component: MaintenanceFormComponent,
+        resolve: {
+          equipments: EquipmentResolver,
+          maintenance: MaintenanceResolver,
         },
       },
     ],

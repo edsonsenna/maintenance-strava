@@ -1,49 +1,54 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore,  } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Maintenance } from '../interfaces/maintenance';
 import { Collections } from '../enums/collections';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class MaintenanceService {
+  constructor(private _firestore: AngularFirestore) {}
 
-    constructor(
-        private _firestore: AngularFirestore
-    ) {}
+  async setMaitenance(
+    userId: number,
+    maintenance: Maintenance
+  ): Promise<boolean> {
+    const maintenanceId = maintenance?.id || null;
+    delete maintenance.id;
 
+    const maintenanceRef = this._firestore
+      .collection(Collections.USERS)
+      .doc(`${userId}`)
+      .collection(Collections.MAINTENANCES);
 
-    async createMaitenance(userId: number, maintenance: Maintenance): Promise<boolean> {
-        return await this._firestore
-            .collection(Collections.USERS)
-            .doc(`${userId}`)
-            .collection(Collections.MAINTENANCES)
-            .add(maintenance)
-            .then(res => {
-                console.log(res);
-                return true;
-            },
-            err => {
-                console.log(err);
-                return false;
-            });
-    }
+    return await maintenanceId
+      ? maintenanceRef
+          .doc(`${maintenanceId}`)
+          .update({
+            ...maintenance,
+          })
+          .then(
+            (_res) => true,
+            (_err) => false
+          )
+      : maintenanceRef.add(maintenance).then(
+          (_res) => true,
+          (_err) => false
+        );
+  }
 
-    async getMaintenanceById(userId: number, maintenanceId: string): Promise<any>  {
-        return await this._firestore
-            .collection(Collections.USERS)
-            .doc(`${userId}`)
-            .collection(Collections.MAINTENANCES)
-            .get()
-            .toPromise()
-            .then(res => {
-                const arr = [];
-                res.forEach(doc => arr.push(doc.data()))
-                return arr;
-            },
-            err => {
-                console.log(err);
-                return false;
-            });
-    }
+  getMaintenanceById(userId: number, maintenanceId: string): Promise<any> {
+    return this._firestore
+      .collection(Collections.USERS)
+      .doc(`${userId}`)
+      .collection(Collections.MAINTENANCES)
+      .doc(`${maintenanceId}`)
+      .get()
+      .toPromise()
+      .then((doc) =>
+        doc?.exists ? { id: maintenanceId, ...doc.data() } : null
+      )
+      .catch((_) => null);
+  }
 }
