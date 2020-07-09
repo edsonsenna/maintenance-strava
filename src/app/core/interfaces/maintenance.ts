@@ -3,9 +3,9 @@ export interface Maintenance {
     equipmentId: string;
     equipmentDistance: number;
     equipmentName: string;
-    maintenanceGoal: number;
+    goal: number;
     type: string;
     value: number;
     name: string;
-    userId: string;
+    isValid: boolean;
 }

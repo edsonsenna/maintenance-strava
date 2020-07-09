@@ -3,10 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
-import * as MaintenanceValues from "../../../mocks/maintenance-values.json";
+import * as MaintenanceTypesJson from "../../../mocks/maintenance-values.json";
 import { TokenService } from '../../../services/token.service';
 import { MaintenanceService } from '../../../services/maintenance.service';
 import { Maintenance } from '../../../interfaces/maintenance';
+import { MaintenanceTypes } from '../../../enums/maintenance-types';
 
 @Component({
   selector: 'ms-maintenance-form',
@@ -18,9 +19,9 @@ export class MaintenanceFormComponent implements OnInit {
 
   private maintenanceForm: FormGroup = null;
   private equipmentsArr: any[] = [];
-  private userId: number = null;
   
-  public types: any[] = MaintenanceValues.values.types;
+  public types: any[] = MaintenanceTypesJson.values.types;
+  public typesEnum: typeof MaintenanceTypes = MaintenanceTypes;
   public maintenance: Maintenance = null;
 
   constructor(
@@ -38,6 +39,9 @@ export class MaintenanceFormComponent implements OnInit {
   }
 
   createReactiveForm() {
+
+    const goalValue = this.maintenance?.type === this.typesEnum?.DATE ? new Date(this.maintenance?.goal) : this.maintenanceGoal;
+
     this.maintenanceForm = this._formBuilder.group({
       id: [this.maintenance?.id || null],
       type: [this.maintenance?.type || null, Validators.required],
@@ -45,8 +49,9 @@ export class MaintenanceFormComponent implements OnInit {
       equipmentId: [this.maintenance?.equipmentId || null, Validators.required],
       equipmentDistance: [{ value: this.maintenance?.equipmentDistance || null, disabled: true}, Validators.required],
       equipmentName: [{ value: this.maintenance?.equipmentName || null, disabled: true}, Validators.required],
-      maintenanceGoal: [this.maintenance?.maintenanceGoal || null, Validators.required],
-      value: [this.maintenance?.value || 0]
+      goal: [goalValue || null, Validators.required],
+      value: [this.maintenance?.value || 0],
+      isValid: [this.maintenance?.isValid || true]
     });
   }
 
@@ -63,8 +68,10 @@ export class MaintenanceFormComponent implements OnInit {
     this.maintenance = this._route.snapshot.data["maintenance"] || null;
     if(this.maintenance) {
       this.maintenance.equipmentDistance /= 1000;
-      this.maintenance.maintenanceGoal /= 1000;
-      this.maintenance.value /= 1000;
+      if(this.maintenance?.type === "distance") {
+        this.maintenance.goal /= 1000;
+        this.maintenance.value /= 1000;
+      }
     }
     console.log(this.maintenance);
   }
@@ -84,8 +91,13 @@ export class MaintenanceFormComponent implements OnInit {
       const maintenance: Maintenance = this.form.getRawValue();
       if(!maintenance.id) delete maintenance.id;
       maintenance.value = Number(maintenance.value * 1000);
-      maintenance.maintenanceGoal = Number(maintenance.maintenanceGoal * 1000);
-      maintenance.equipmentDistance = Number(maintenance.equipmentDistance * 1000);
+      if(maintenance.type === this.typesEnum?.DISTANCE) {
+        maintenance.goal = Number(maintenance.goal * 1000);
+        maintenance.equipmentDistance = Number(maintenance.equipmentDistance * 1000);
+      }
+      if(maintenance.type === this.typesEnum?.DATE) {
+        maintenance.goal = Number(`${Number(maintenance.goal)}`.padStart(13, '0'));
+      }
       await this._maintenanceService.setMaitenance(this._tokenService.userId, maintenance);
       this._router.navigateByUrl('maintenance');
     } else {
@@ -125,7 +137,7 @@ export class MaintenanceFormComponent implements OnInit {
   }
 
   get maintenanceGoal() {
-    return this.maintenanceForm?.get('maintenanceGoal') || null;
+    return this.maintenanceForm?.get('goal') || null;
   }
 
   get equipments() {

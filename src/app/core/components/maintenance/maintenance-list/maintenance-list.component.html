@@ -12,14 +12,26 @@
               <div>
                 {{ 'maintenance.card.equipmentName' | translate }}: {{ maintenance?.equipmentName }}
               </div>
-              <div>
-                {{ 'maintenance.card.distance.initial' | translate }}: {{ (maintenance?.equipmentDistance / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+
+              <div *ngIf="maintenance.type === 'distance'">
+                <div>
+                  {{ 'maintenance.card.distance.actual' | translate }}: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
+                </div>
+                <div>
+                  {{ 'maintenance.card.distance.goal' | translate }}: {{ (maintenance?.goal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+                </div>
               </div>
-              <div>
-                {{ 'maintenance.card.distance.actual' | translate }}: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
+
+              <div *ngIf="maintenance.type === 'date'">
+                <div>
+                  {{ 'maintenance.card.date.goal' | translate }}: {{ maintenance.goal | date:'dd/MM/yyyy':'pt' }}
+                </div>
               </div>
-              <div>
-                {{ 'maintenance.card.distance.goal' | translate }}: {{ (maintenance?.maintenanceGoal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+
+              <div *ngIf="maintenance.type === 'hours'">
+                <div>
+                  {{ 'maintenance.card.hours.goal' | translate }}: {{ maintenance.goal }}
+                </div>
               </div>
             </mat-card-content>
           </mat-card>

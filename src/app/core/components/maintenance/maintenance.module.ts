@@ -9,6 +9,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { MaintenanceListComponent } from './maintenance-list/maintenance-list.component';
 import { MaintenanceFormComponent } from './maintenance-form/maintenance-form.component';
 import { AngularMaterialModule } from '../../modules/angular-material.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 const declarations = [
   MaintenanceFormComponent,
@@ -29,6 +30,9 @@ const imports = [
   declarations: [...declarations],
   imports: [
     ...imports
+  ],
+  providers:[
+    {provide: MAT_DATE_LOCALE, useValue: 'pt'}
   ]
 })
 export class MaintenanceModule { }

@@ -16,15 +16,15 @@
             "equipmentDistance": "Quilometragem do Equipamento",
             "distance": {
                 "actual": "Quilometragem Atual",
-                "goal": "Quilometragem Alvo",
+                "goal": "Quilometragem Troca",
                 "initial": "Quilometragem Inicial",
                 "unit": "Km"
             },
             "date": {
-                "goal": "Data Alvo"
+                "goal": "Data Troca"
             },
             "hours": {
-                "goal": "Horas Alvo" 
+                "goal": "Horas para Troca" 
             }
 
         }
