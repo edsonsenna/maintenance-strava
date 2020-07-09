@@ -40,8 +40,8 @@ export class MaintenanceFormComponent implements OnInit {
   createReactiveForm() {
     this.maintenanceForm = this._formBuilder.group({
       id: [this.maintenance?.id || null],
-      name: [this.maintenance?.name || null, Validators.required],
       type: [this.maintenance?.type || null, Validators.required],
+      name: [this.maintenance?.name || null, Validators.required],
       equipmentId: [this.maintenance?.equipmentId || null, Validators.required],
       equipmentDistance: [{ value: this.maintenance?.equipmentDistance || null, disabled: true}, Validators.required],
       equipmentName: [{ value: this.maintenance?.equipmentName || null, disabled: true}, Validators.required],

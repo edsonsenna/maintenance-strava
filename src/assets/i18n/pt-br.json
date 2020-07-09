@@ -4,7 +4,8 @@
             "title": "Criar Nova Manutenção",
             "types": {
                 "distance": "Distância",
-                "date": "Data"
+                "date": "Data",
+                "hours": "Horas de Uso"
             }
         },
         "list": {
@@ -18,6 +19,12 @@
                 "goal": "Quilometragem Alvo",
                 "initial": "Quilometragem Inicial",
                 "unit": "Km"
+            },
+            "date": {
+                "goal": "Data Alvo"
+            },
+            "hours": {
+                "goal": "Horas Alvo" 
             }
 
         }
@@ -33,9 +40,14 @@
         "inputTitles": {
             "bikes": "Bicicletas",
             "equipmentDistance": "Quilometragem do Equipamento",
-            "maintenanceType": "Tipo da Manutenção",
-            "maintenanceGoal": "Quilometragem de Troca",
-            "maintenanceDate": "Data de Troca",
+            "maintenance": {
+                "type": "Tipo da Manutenção",
+                "goal": {
+                    "distance": "Quilometragem de Troca",
+                    "date": "Data de Troca",
+                    "hours": "Horas de Uso para Troca"
+                }
+            },
             "name": "Nome"
         },
         "placeholders": {

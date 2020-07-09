@@ -3,19 +3,7 @@
         <mat-card-title>{{ 'maintenance.create.title' | translate }}</mat-card-title>
         <mat-card-content>
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.inputTitles.bikes' | translate}}</mat-label>
-                <mat-select formControlName="equipmentId" (selectionChange)="onEquipmentSelect();">
-                    <mat-option *ngFor="let equipment of equipments" [value]="equipment.id">{{ equipment.name }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="this.equipment.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.inputTitles.equipmentDistance' | translate}}</mat-label>
-                <input matInput formControlName="equipmentDistance" mask="separator.0" thousandSeparator="." suffix=" Km">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.inputTitles.maintenanceType' | translate}}</mat-label>
+                <mat-label>{{ 'shared.inputTitles.maintenance.type' | translate}}</mat-label>
                 <mat-select formControlName="type">
                     <mat-option *ngFor="let type of types" [value]="type.value">
                         {{ 'maintenance.create.types.' + type.name | translate }}
@@ -23,22 +11,46 @@
                 </mat-select>
                 <mat-error *ngIf="this.type.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.name' | translate}}</mat-label>
                 <input matInput formControlName="name" placeholder="{{ 'shared.placeholders.maintenanceName' | translate }}">
                 <mat-error *ngIf="this.name.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.inputTitles.maintenanceGoal' | translate}}</mat-label>
+                <mat-label>{{ 'shared.inputTitles.bikes' | translate}}</mat-label>
+                <mat-select formControlName="equipmentId" (selectionChange)="onEquipmentSelect();">
+                    <mat-option *ngFor="let equipment of equipments" [value]="equipment.id">{{ equipment.name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="this.equipment.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-field" *ngIf="!this.type?.value || this.type?.value === 'distance'" >
+                <mat-label>{{ 'shared.inputTitles.equipmentDistance' | translate}}</mat-label>
+                <input matInput formControlName="equipmentDistance" mask="separator.0" thousandSeparator="." suffix=" Km">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-field" *ngIf="!this.type?.value || this.type?.value === 'distance'">
+                <mat-label>{{ 'shared.inputTitles.maintenance.goal.distance' | translate}}</mat-label>
                 <input matInput formControlName="maintenanceGoal"  mask="separator.0" thousandSeparator="." suffix=" Km">
                 <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="full-field" *ngIf="false">
-                <mat-label>{{ 'shared.inputTitles.maintenanceDate' | translate}}</mat-label>
-                <input matInput [matDatepicker]="datePicker" readonly (click)="datePicker.open()">
+
+            <mat-form-field appearance="outline" class="full-field" *ngIf="this.type?.value === 'date'">
+                <mat-label>{{ 'shared.inputTitles.maintenance.goal.date' | translate}}</mat-label>
+                <input formControlName="maintenanceGoal" matInput [matDatepicker]="datePicker" readonly (click)="datePicker.open()">
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker disabled="false"></mat-datepicker>
-              </mat-form-field>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-field" *ngIf="this.type?.value === 'hours'">
+                <mat-label>{{ 'shared.inputTitles.maintenance.goal.hours' | translate}}</mat-label>
+                <input formControlName="maintenanceGoal" matInput formControlName="maintenanceGoal"  mask="separator.0" thousandSeparator="." suffix=" Hours">
+                <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
+            </mat-form-field>
+
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'shared.buttons.' + (this.maintenance?.id ? 'update' : 'create') | translate }}</button>

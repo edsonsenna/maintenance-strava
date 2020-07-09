@@ -4,7 +4,8 @@
             "title": "Create New Maintenance",
             "types": {
                 "distance": "Distance",
-                "date": "Date"
+                "date": "Date",
+                "hours": "Hours"
             }
         },
         "list": {
@@ -18,6 +19,12 @@
                 "goal": "Goal Distance",
                 "initial": "Initial Distance",
                 "unit": "Km"
+            },
+            "date": {
+                "goal": "Goal Distance"
+            },
+            "hours": {
+                "goal": "Goal Hours" 
             }
 
         }
@@ -33,8 +40,14 @@
         "inputTitles": {
             "bikes": "Bikes",
             "equipmentDistance": "Equipment Distance",
-            "maintenanceType": "Maintenance Type",
-            "maintenanceGoal": "Change Distance",
+            "maintenance": {
+                "type": "Maintenance Type",
+                "goal": {
+                    "distance": "Maintenance Distance",
+                    "date": "Maintenance Date",
+                    "hours": "Maintenance Usage Hours"
+                }
+            },
             "maintenanceDate": "Change Date",
             "name": "Name"
         },
