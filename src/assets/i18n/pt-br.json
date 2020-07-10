@@ -24,7 +24,11 @@
                 "goal": "Data Troca"
             },
             "hours": {
-                "goal": "Horas para Troca" 
+                "goal": "Horas para Troca",
+                "unit": {
+                    "singular": "Hora",
+                    "plural": "Horas"
+                }
             }
 
         }
