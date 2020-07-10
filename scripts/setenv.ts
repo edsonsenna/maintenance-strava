@@ -7,7 +7,7 @@ const environment = argv.environment;
 const isProduction = environment === 'prod';
 
 const targetPath = isProduction
-    ? `./src/environments/environment.prod.ts`
+    ? `/opt/build/repo/src/environments/environment.prod.ts`
     : `./src/environments/environment.ts`;
 
 const environmentFileContent = `
