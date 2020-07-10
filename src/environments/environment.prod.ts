@@ -1,7 +1,6 @@
-require('dotenv').config();
 
-export const environment = {
-  production: true,
-  firebaseConfig: {},
-  stravaConfig: {}
-};
+    export const environment = {
+        production: true,
+        firebaseConfig: {},
+        stravaConfig: {}
+    }
