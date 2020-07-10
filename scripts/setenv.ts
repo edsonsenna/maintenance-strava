@@ -1,4 +1,4 @@
-const { writeFileSync } = require('fs');
+const { dir, writeFile } = require('fs');
 const { argv } = require('yargs');
 
 require('dotenv').config();
@@ -33,11 +33,13 @@ const environmentFileContent = `
     }
 `;
 
-writeFileSync(targetPath, environmentFileContent, function(err) {
+writeFile(targetPath, environmentFileContent, function(err) {
     if(err) {
         console.log(err);
     }
 
+    console.log(dir.path);
+    console.log(targetPath);
     console.log(environmentFileContent);
     console.log(`Wrote successfully!`);
 });
