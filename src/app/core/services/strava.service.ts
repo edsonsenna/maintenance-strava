@@ -2,16 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 
-const STRAVA_AUTH_URL = environment.stravaConfig.stravaAuthUrl;
-const STRAVA_API_URL = environment.stravaConfig.stravaBaseApiUrl;
-const CLIENT_ID_PARAM = environment.stravaConfig.clientId;
-const CLIENT_SECRET_PARAM = environment.stravaConfig.clientSecret
-const GRANT_TYPE = environment.stravaConfig.grantType;
-const GRANT_REFRESH_TYPE = environment.stravaConfig.grantRefreshType;
+const STRAVA_AUTH_URL = environment.stravaConfig['stravaAuthUrl'];
+const STRAVA_API_URL = environment.stravaConfig['stravaBaseApiUrl'];
+const CLIENT_ID_PARAM = environment.stravaConfig['clientId'];
+const CLIENT_SECRET_PARAM = environment.stravaConfig['clientSecret'];
+const GRANT_TYPE = environment.stravaConfig['grantType'];
+const GRANT_REFRESH_TYPE = environment.stravaConfig['grantRefreshType'];
 
 @Injectable({
     providedIn: 'root'
