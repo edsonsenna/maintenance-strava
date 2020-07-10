@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "config": "ts-node ./scripts/setenv.ts",
+    "start": "npm run config -- --environment=dev && ng serve",
+    "build": "npm run config -- --environment=prod && ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -30,6 +31,7 @@
     "ngx-mask": "^9.1.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "yargs": "^15.4.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

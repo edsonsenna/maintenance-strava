@@ -47,4 +47,4 @@ Thumbs.db
 
 /src/firebaseconfig.json
 /src/stravaconfig.json
-/src/.env
+.env

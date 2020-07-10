@@ -1,20 +1,21 @@
-import * as firebaseConfig from '../firebaseconfig.json';
-import * as stravaConfig from '../stravaconfig.json';
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
-  firebaseConfig: firebaseConfig.config,
-  stravaConfig: stravaConfig.config
-};
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+    export const environment = {
+        production: false,
+        firebaseConfig: {
+            "apiKey": "AIzaSyA1SaisrSiQ8NSYCE1LABJTT_Zxf43Cq60",
+            "authDomain": "maintance-strava.firebaseapp.com",
+            "databaseURL": "https://maintance-strava.firebaseio.com",
+            "projectId": "maintance-strava",
+            "storageBucket": "maintance-strava.appspot.com",
+            "messagingSenderId": "878034168275",
+            "appId": "1:878034168275:web:22ef570d2ec9fb1cf26726"
+        },
+        stravaConfig: {
+            "stravaAuthUrl": "http://www.strava.com/oauth/",
+            "stravaBaseApiUrl": "https://www.strava.com/api/v3",
+            "clientId": "33524",
+            "clientSecret": "4417fb89842153873e3a17c8c474b39454ecd272",
+            "grantType": "grant_type=authorization_code",
+            "grantRefreshType": "grant_type=refresh_token"
+        }
+    }
