@@ -38,5 +38,6 @@ writeFile(targetPath, environmentFileContent, function(err) {
         console.log(err);
     }
 
+    console.log(environmentFileContent);
     console.log(`Wrote successfully!`);
 });
