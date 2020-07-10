@@ -1,10 +1,9 @@
-const { dir, writeFile } = require('fs');
+const { writeFile } = require('fs');
 const { argv } = require('yargs');
 
 require('dotenv').config();
 
-const scriptPath = argv.path;
-const environment = argv.environment;
+const environment = 'prod';
 const isProduction = environment === 'prod';
 
 const targetPath = isProduction
@@ -38,8 +37,6 @@ writeFile(targetPath, environmentFileContent, function(err) {
     if(err) {
         console.log(err);
     }
-
-    console.log(scriptPath);
     console.log(targetPath);
     console.log(environmentFileContent);
     console.log(`Wrote successfully!`);
