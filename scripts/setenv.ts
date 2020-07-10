@@ -7,7 +7,7 @@ const environment = 'prod';
 const isProduction = environment === 'prod';
 
 const targetPath = isProduction
-    ? `/opt/build/repo/src/environments/environment.prod.ts`
+    ? `./src/environments/environment.prod.ts`
     : `./src/environments/environment.ts`;
 
 const environmentFileContent = `
@@ -37,7 +37,4 @@ writeFile(targetPath, environmentFileContent, function(err) {
     if(err) {
         console.log(err);
     }
-    console.log(targetPath);
-    console.log(environmentFileContent);
-    console.log(`Wrote successfully!`);
 });
