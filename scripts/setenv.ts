@@ -3,6 +3,7 @@ const { argv } = require('yargs');
 
 require('dotenv').config();
 
+const scriptPath = dir.path;
 const environment = argv.environment;
 const isProduction = environment === 'prod';
 
@@ -38,7 +39,7 @@ writeFile(targetPath, environmentFileContent, function(err) {
         console.log(err);
     }
 
-    console.log(dir.path);
+    console.log(scriptPath);
     console.log(targetPath);
     console.log(environmentFileContent);
     console.log(`Wrote successfully!`);
