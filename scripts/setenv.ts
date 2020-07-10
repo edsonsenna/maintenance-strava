@@ -1,4 +1,4 @@
-const { writeFile } = require('fs');
+const { writeFileSync } = require('fs');
 const { argv } = require('yargs');
 
 require('dotenv').config();
@@ -33,7 +33,7 @@ const environmentFileContent = `
     }
 `;
 
-writeFile(targetPath, environmentFileContent, function(err) {
+writeFileSync(targetPath, environmentFileContent, function(err) {
     if(err) {
         console.log(err);
     }
