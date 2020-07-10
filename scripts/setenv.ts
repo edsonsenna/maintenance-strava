@@ -3,7 +3,7 @@ const { argv } = require('yargs');
 
 require('dotenv').config();
 
-const scriptPath = dir.path;
+const scriptPath = argv.path;
 const environment = argv.environment;
 const isProduction = environment === 'prod';
 
