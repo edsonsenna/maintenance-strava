@@ -24,7 +24,11 @@
                 "goal": "Goal Distance"
             },
             "hours": {
-                "goal": "Goal Hours" 
+                "goal": "Goal Hours",
+                "unit": {
+                    "singular": "Hour",
+                    "plural": "Hours"
+                }
             }
 
         }

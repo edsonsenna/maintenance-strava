@@ -15,10 +15,10 @@
 
               <div *ngIf="maintenance.type === 'distance'">
                 <div>
-                  {{ 'maintenance.card.distance.actual' | translate }}: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} Km
+                  {{ 'maintenance.card.distance.actual' | translate }}: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} {{ 'maintenance.card.distance.unit' | translate }}
                 </div>
                 <div>
-                  {{ 'maintenance.card.distance.goal' | translate }}: {{ (maintenance?.goal / 1000).toFixed(0) | mask:'separator.2':'.'}} Km
+                  {{ 'maintenance.card.distance.goal' | translate }}: {{ (maintenance?.goal / 1000).toFixed(0) | mask:'separator.2':'.'}} {{ 'maintenance.card.distance.unit' | translate }}
                 </div>
               </div>
 
@@ -30,7 +30,7 @@
 
               <div *ngIf="maintenance.type === 'hours'">
                 <div>
-                  {{ 'maintenance.card.hours.goal' | translate }}: {{ maintenance.goal }}
+                  {{ 'maintenance.card.hours.goal' | translate }}: {{ (maintenance?.goal / 60).toFixed(0) | mask:'separator.2':'.'}}
                 </div>
               </div>
             </mat-card-content>

@@ -4,7 +4,7 @@
         <mat-card-content>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenance.type' | translate}}</mat-label>
-                <mat-select formControlName="type">
+                <mat-select formControlName="type" (selectionChange)="onTypeSelect();">
                     <mat-option *ngFor="let type of types" [value]="type.value">
                         {{ 'maintenance.create.types.' + type.name | translate }}
                     </mat-option>
@@ -35,7 +35,7 @@
             <mat-form-field appearance="outline" class="full-field" *ngIf="!this.type?.value || this.type?.value === this.typesEnum?.DISTANCE">
                 <mat-label>{{ 'shared.inputTitles.maintenance.goal.distance' | translate}}</mat-label>
                 <input matInput formControlName="goal"  mask="separator.0" thousandSeparator="." suffix=" Km">
-                <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
+                <mat-error *ngIf="this.goal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-field" *ngIf="this.type?.value === this.typesEnum?.DATE">
@@ -43,12 +43,13 @@
                 <input formControlName="goal" matInput [matDatepicker]="datePicker" readonly (click)="datePicker.open()">
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #datePicker disabled="false"></mat-datepicker>
+                <mat-error *ngIf="this.goal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-field" *ngIf="this.type?.value === this.typesEnum?.HOURS">
                 <mat-label>{{ 'shared.inputTitles.maintenance.goal.hours' | translate}}</mat-label>
-                <input formControlName="goal" matInput formControlName="maintenanceGoal"  mask="separator.0" thousandSeparator="." suffix=" Hours">
-                <mat-error *ngIf="this.maintenanceGoal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
+                <input formControlName="goal" matInput mask="separator.0" thousandSeparator=".">
+                <mat-error *ngIf="this.goal.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
             </mat-form-field>
 
         </mat-card-content>
