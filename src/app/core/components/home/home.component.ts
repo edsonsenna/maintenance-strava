@@ -34,11 +34,11 @@ export class HomeComponent implements OnInit {
   public menuOptions = [
     {
       path: '/home',
-      name: 'Home'
+      name: 'home'
     },
     {
       path: '/maintenance',
-      name: 'Maintenances'
+      name: 'maintenances'
     }
   ]
   
@@ -81,113 +81,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  async getUserEquipmentsAndUpdate() {
-    const equipments = await this._stravaService.getAuthenticadedUserBikes()
-    equipments.forEach(equipment => {
-      this.updateMaintenanceData(equipment);
-    })
-    console.log(equipments);
-  }
-
-  updateMaintenanceData(equipment) {
-    this._firestore
-      .collection(Collections.USERS)
-      .doc(`${this.tokenService.userId}`)
-      .collection(Collections.MAINTENANCES)
-      .ref
-      .where('equipmentId', '==', equipment.id)
-      .get()
-      .then(values => {
-        values.forEach(value => {
-          const data = value.data();
-          const difference = equipment.distance - data.equipmentDistance;
-          value.ref.update({ value: difference > 0 ? difference : 0 });
-          console.log(equipment.id + ' / ', value.data());
-        });
-      })
-  }
-
-  receiveQueryParams() {
-
-    this.route
-      .queryParams
-      .pipe(filter(params => params.code))
-      .subscribe(params => {
-        this.userCode = params?.code;
-      });
-
-  }
-
-  async getUserToken() {
-    if(this.userCode) {
-      const receiveTokenReponse = {
-        next: (response: TokenResponse) => {
-          if(response.access_token && response.expires_in) {
-            localStorage.setItem(AUTH_TOKEN, response.access_token);
-            this.getUserInfo();
-          }
-          if(response.athlete) {
-            this.athlete = response.athlete;
-          }
-          this.tokenService.save(response);
-          console.log(response);
-          console.log(this.athlete);
-        }
-      }
-      return await this._stravaService
-        .getAuthToken(this.userCode)
-        .pipe(tap(receiveTokenReponse))
-        .toPromise()
-        .then(() => true)
-        .catch(() => false);
-    } else {
-      this.getUserInfo();
-    }
-
-    return Promise.resolve(false);
-  }
-
-  async getUserInfo() {
-    const receiveUser = {
-      next: (user) => {
-        console.log('User ', user);
-        if(user) {
-          this.updateUser(user.id, user.bikes);
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    }
-
-    return await this._stravaService
-        .getAuthenticadedUser()
-        .pipe(tap(receiveUser))
-        .toPromise()
-        .then(() => true)
-        .catch(() => false);
-  }
-
-  async findUser() {
-    if(this.athlete) {
-      this.user = await this.userService.findUserById(`${this.athlete.id}`);
-      console.log('User by Id', this.user);
-    }
-  }
-
-  async createUser() {
-    this.user = {
-      created: new Date(),
-      update: new Date(),
-      athlete: this.athlete
-    };
-
-    const userCreated = await this.userService.createUser(this.user);
-    console.log('Creating' + userCreated);
-  }
-
-  async updateUser(userId: string, bikes: []) {
-    await this.userService.updateUser(userId, bikes);
+  exit() {
+    this.tokenService.clearAllTokens();
+    const urlTree = this._router.createUrlTree(['login']);
+    this._router.navigateByUrl(urlTree);
   }
 
 }
