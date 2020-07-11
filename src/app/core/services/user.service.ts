@@ -16,11 +16,9 @@ export class UserService {
             .doc(`${user.athlete.id}`)
             .set(user)
             .then(res => {
-                console.log(res);
                 return true;
             },
             err => {
-                console.log(err);
                 return false;
             })
     }
@@ -36,7 +34,6 @@ export class UserService {
                     ? <User>doc.data() 
                     : null)
         .catch(err => {
-            console.log('Erro ao buscar usuario ', err);
             return null;
         });
 
