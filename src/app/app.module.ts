@@ -61,6 +61,5 @@ export class AppModule {
     // TODO: Get user client language as default language 
     translateService.setDefaultLang('pt-br');
     translateService.use('pt-br');
-    console.log(environment);
   }
 }

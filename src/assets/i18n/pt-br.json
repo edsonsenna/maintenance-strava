@@ -60,5 +60,10 @@
         "errors": {
             "required": "*Campo obrigatório."
         }
+    },
+    "menuOptions": {
+        "home": "Home",
+        "maintenances": "Manutenções",
+        "exit": "Sair"
     }
 }

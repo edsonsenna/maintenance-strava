@@ -23,7 +23,6 @@ export class MaintenanceListComponent implements OnInit {
 
   ngOnInit() {
     this.getMaintenances();
-    console.log(this._tokenService.isTokenValid);
   }
 
   getMaintenances() {
