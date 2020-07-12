@@ -1,16 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoginGuard } from './login.guard';
+import { HttpClient } from '@angular/common/http';
 
 describe('LoginGuard', () => {
-  let guard: LoginGuard;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(LoginGuard);
-  });
-
-  it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
 });
