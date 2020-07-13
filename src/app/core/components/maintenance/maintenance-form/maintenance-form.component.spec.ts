@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HarnessLoader } from '@angular/cdk/testing'; 
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -39,7 +39,8 @@ describe('MaintenanceFormComponent', () => {
         AngularMaterialModule,
         NoopAnimationsModule,
         RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        ReactiveFormsModule
       ]
     })
     .compileComponents();
@@ -63,34 +64,73 @@ describe('MaintenanceFormComponent', () => {
     expect(component.form).not.toBeNull();
   })
 
-  it('should create maintenance type select and be valid', async () => {
-    component.types = [
-      {
-          "name": "distance",
-          "value": "distance"
-      },
-      {
-          "name": "date",
-          "value": "date"
-      },
-      {
-          "name": "hours",
-          "value": "hours"
-      }
-    ]
+  it('should create maintenance type select and be valid', fakeAsync(() => {
+    
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.type).not.toBeNull();
+    tick();
 
-    const select = await loader.getHarness(MatSelectHarness);
-    await select.open();
-    const hoursOption = await select.getOptions() || null;
-    expect(hoursOption.length).toBeGreaterThan(0);
-    if(hoursOption) {
-      await hoursOption[2].click();
-      expect(component.type.value).toBe('hours');
+    component.equipment.setValue(1);
+    component.equipmentDistance.setValue(2000);
+    component.equipmentName.setValue('Equipment 1');
+    component.value.setValue(0);
+    component.name.setValue('Chain change');
+    component.type.setValue('hours');
+    fixture.detectChanges();
+    tick();
 
-    }
+    const goalInput = fixture.debugElement.query(By.css('#hoursGoal')).nativeElement;
+    expect(goalInput).not.toBeNull();
+    expect(goalInput).not.toBeUndefined();
+    goalInput.value = 50;
+    goalInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    tick();
+
+    expect(component.form.valid).toBeTrue();
+  }));
+
+  it('should not create maintenance hours type when goal was not provided', fakeAsync(() => {
     
-  })
+    component.ngOnInit();
+    fixture.detectChanges();
+    tick();
+
+    component.equipment.setValue(1);
+    component.equipmentDistance.setValue(2000);
+    component.equipmentName.setValue('Equipment 1');
+    component.value.setValue(0);
+    component.name.setValue('Chain change');
+    fixture.detectChanges();
+    tick();
+
+    component.type.setValue('hours');
+    component.onTypeSelect();
+    fixture.detectChanges();
+    tick();
+    
+    expect(component.form.invalid).toBeTrue();
+  }));
+
+  it('should not create maintenance date type when goal was not provided', fakeAsync(() => {
+    
+    component.ngOnInit();
+    fixture.detectChanges();
+    tick();
+
+    component.equipment.setValue(1);
+    component.equipmentDistance.setValue(2000);
+    component.equipmentName.setValue('Equipment 1');
+    component.value.setValue(0);
+    component.name.setValue('Chain change');
+    fixture.detectChanges();
+    tick();
+
+    component.type.setValue('date');
+    component.onTypeSelect();
+    fixture.detectChanges();
+    tick();
+
+    expect(component.form.invalid).toBeTrue();
+  }));
 });

@@ -78,7 +78,7 @@ export class MaintenanceFormComponent implements OnInit {
 
   onTypeSelect() {
     this.goal.setValidators(Validators.required);
-    this.goal.setValue(0);
+    this.goal.setValue(null);
     this.goal.updateValueAndValidity();
     if(this.type?.value === this.typesEnum?.DISTANCE) {
     const equipment = this.equipmentsArr.find(equipment => equipment.id === this.equipment.value) || null;
@@ -140,6 +140,7 @@ export class MaintenanceFormComponent implements OnInit {
   }
 
   get type() {
+    this.maintenanceForm?.get('type');
     return this.maintenanceForm?.get('type') || null;
   }
 
