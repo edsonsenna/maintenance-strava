@@ -104,7 +104,7 @@ export class MaintenanceFormComponent implements OnInit {
     this.equipmentDistance.updateValueAndValidity();
     this.equipmentName.setValue(equipment?.name ? equipment.name : null);
     this.equipmentName.updateValueAndValidity();
-    this.goal.setValue(0);
+    this.goal.setValue(null);
     this.goal.updateValueAndValidity();
   }
 
