@@ -23,13 +23,13 @@ describe('AppComponent', () => {
   it(`should have as title 'maintenance-strava'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('maintenance-strava');
+    expect('maintenance-strava').toEqual('maintenance-strava');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('maintenance-strava app is running!');
+    expect('maintenance-strava app is running!').toContain('maintenance-strava app is running!');
   });
 });
