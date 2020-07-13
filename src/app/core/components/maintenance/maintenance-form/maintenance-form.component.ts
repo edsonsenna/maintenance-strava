@@ -71,7 +71,7 @@ export class MaintenanceFormComponent implements OnInit {
         this.maintenance.goal /= 1000;
         this.maintenance.value /= 1000;
       } else if(this.maintenance?.type === this.typesEnum?.HOURS) {
-        this.maintenance.goal /= 60;
+        this.maintenance.goal /= 3600;
       }
     }
   }
@@ -120,7 +120,7 @@ export class MaintenanceFormComponent implements OnInit {
       else if(maintenance.type === this.typesEnum?.DATE) {
         maintenance.goal = Number(`${Number(maintenance.goal)}`.padStart(13, '0'));
       } else if(maintenance.type === this.typesEnum?.HOURS) {
-        maintenance.goal *= 60;
+        maintenance.goal *= 3600;
       }
       await this._maintenanceService.setMaitenance(this._tokenService.userId, maintenance);
       this._router.navigateByUrl('maintenance');
