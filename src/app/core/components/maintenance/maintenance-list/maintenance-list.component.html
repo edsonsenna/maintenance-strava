@@ -2,9 +2,6 @@
     <div class="title">
         {{ 'maintenance.list.title' | translate }}
     </div>
-    <div class="new-button">
-        <button mat-raised-button color="primary" routerLink="/maintenance/create">{{ 'shared.buttons.create' | translate}}</button>
-    </div>
     <div class="list">
         <mat-card class="card" *ngFor="let maintenance of maintenances | async" [routerLink]="'/maintenance/create/' + maintenance.id">
             <mat-card-title>{{ maintenance.name }} </mat-card-title>
@@ -35,5 +32,10 @@
               </div>
             </mat-card-content>
           </mat-card>
+    </div>
+    <div class="create-button">
+      <button routerLink="/maintenance/create" mat-fab color="primary" aria-label="Icon button with a add icon">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 </div>
