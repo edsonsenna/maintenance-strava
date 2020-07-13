@@ -17,3 +17,9 @@
 .full-field {
     width: 100%;
 }
+
+@media screen and (max-width: 540px) {
+    .form-card {
+        min-width: 300px;
+    }
+}
