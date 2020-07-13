@@ -4,7 +4,7 @@
         <mat-card-content>
             <mat-form-field appearance="outline" class="full-field">
                 <mat-label>{{ 'shared.inputTitles.maintenance.type' | translate}}</mat-label>
-                <mat-select formControlName="type" (selectionChange)="onTypeSelect();">
+                <mat-select id="type" formControlName="type" (selectionChange)="onTypeSelect();">
                     <mat-option *ngFor="let type of types" [value]="type.value">
                         {{ 'maintenance.create.types.' + type.name | translate }}
                     </mat-option>
