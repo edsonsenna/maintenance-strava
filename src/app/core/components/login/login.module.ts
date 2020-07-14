@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
@@ -13,7 +13,8 @@ const declarations = [
 const imports = [
     AngularMaterialModule,
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    TranslateModule.forChild()
 ];
 
 const exps = [

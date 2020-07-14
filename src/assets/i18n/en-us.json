@@ -34,12 +34,16 @@
         }
     },
     "shared": {
+        "app": {
+            "name": "Maintenances Strava"
+        },
         "buttons": {
             "create": "Create",
             "update": "Update",
             "delete": "Delete",
             "cancel": "Cancel",
-            "back": "Back"
+            "back": "Back",
+            "login": "Login with Strava"
         },
         "inputTitles": {
             "bikes": "Bikes",
