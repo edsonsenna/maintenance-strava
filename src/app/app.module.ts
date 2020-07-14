@@ -15,9 +15,15 @@ import { HttpIntercept } from './core/interceptors/http-intercept.interceptor';
 import { MaintenanceModule } from './core/components/maintenance/maintenance.module';
 import { HttpLoaderFactory } from './core/loaders/http-i18n-loader';
 import { LoginModule } from './core/components/login/login.module';
+import { QuestionDialogComponent } from './core/components/question-dialog/question-dialog.component';
 
 const declarations = [
-  AppComponent
+  AppComponent,
+  QuestionDialogComponent
+]
+
+const entryComponents = [
+  QuestionDialogComponent
 ]
 
 const imports = [
@@ -55,6 +61,7 @@ const providers = [
   imports: [
     ...imports
   ],
+  entryComponents: [...entryComponents],
   providers: [...providers],
   bootstrap: [AppComponent]
 })

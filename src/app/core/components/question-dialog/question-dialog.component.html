@@ -1,0 +1,6 @@
+<div mat-dialog-title>{{ this.data?.title  | translate }}</div>
+<div mat-dialog-content>{{ this.data?.question | translate }}</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close="false">{{ this.data?.denyButtonText || 'shared.buttons.cancel' | translate }}</button>
+    <button mat-raised-button color="primary" mat-dialog-close="true">{{ this.data?.allowButtonText || 'shared.buttons.confirm' | translate }}</button>
+</div>

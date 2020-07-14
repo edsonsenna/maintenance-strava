@@ -8,6 +8,10 @@
                 "hours": "Horas de Uso"
             }
         },
+        "delete": {
+            "title": "Excluir Manutenção",
+            "question": "Você deseja realmente excluir a manutenção selecionada?"
+        },
         "list": {
             "title": "Minhas Manutenções"
         },
@@ -43,7 +47,9 @@
             "delete": "Excluir",
             "cancel": "Cancelar",
             "back": "Voltar",
-            "login": "Entrar com Strava"
+            "login": "Entrar com Strava",
+            "yes": "Sim",
+            "no": "Não"
         },
         "inputTitles": {
             "bikes": "Bicicletas",
