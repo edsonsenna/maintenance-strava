@@ -2,15 +2,18 @@
     padding: 16px;
     display:flex;
     flex-direction: row;
-    justify-content: center;
     vertical-align: middle;
-    width: 100%;
+    justify-content: center;
     height: 100vh;
+    background-color: #383736;
 }
 
 .login-card {
-    width: 320px;
+    width: 90%;
+    max-width: 300px;
     height: 280px;
+    background-color: #ee5536;
+    color: #fff;
 }
 
 .mat-card-title {
@@ -19,8 +22,12 @@
 }
 
 .mat-card-content {
-    height: 80%;
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
+    height: 80%;
+}
+
+.mat-card-content > .login-strava {
+    height: 40px;
 }

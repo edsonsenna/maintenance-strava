@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { HttpIntercept } from './core/interceptors/http-intercept.interceptor';
 import { MaintenanceModule } from './core/components/maintenance/maintenance.module';
 import { HttpLoaderFactory } from './core/loaders/http-i18n-loader';
+import { LoginModule } from './core/components/login/login.module';
 
 const declarations = [
   AppComponent
@@ -26,6 +27,7 @@ const imports = [
   AppRoutingModule,
   BrowserAnimationsModule,
   BrowserModule,
+  LoginModule,
   MaintenanceModule,
   HttpClientModule,
   TranslateModule.forRoot({
