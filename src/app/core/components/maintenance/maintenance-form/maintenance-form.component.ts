@@ -160,15 +160,27 @@ export class MaintenanceFormComponent implements OnInit {
         if(deletionResult) {
           this.navigateBackToList();
         }
-        console.log('deleting object ', this.id?.value);
       }
     });
   }
 
   onCancel() {
-    if(confirm('Are you sure that you want to leave the page without saving the changes?')) {
-      this.navigateBackToList();
-    }
+    this.matDialogRef = this._matDialog.open(QuestionDialogComponent, {
+      data: {
+        title: 'shared.question.cancel.title',
+        question: 'shared.question.cancel.question',
+        denyButtonText: 'shared.buttons.no',
+        allowButtonText: 'shared.buttons.yes'
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    this.matDialogRef.afterClosed().subscribe(async (confirm) => {
+      if(confirm) {
+        this.navigateBackToList();
+      }
+    });
   }
 
   navigateBackToList() {

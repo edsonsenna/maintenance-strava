@@ -70,6 +70,12 @@
         },
         "errors": {
             "required": "*Required field."
+        },
+        "question": {
+            "cancel": {
+                "title": "Cancel operation",
+                "question": "Are you sure that you want to cancel the operation?"
+            }
         }
     },
     "menuOptions": {
