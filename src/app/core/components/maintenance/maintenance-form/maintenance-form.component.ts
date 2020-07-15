@@ -129,7 +129,7 @@ export class MaintenanceFormComponent implements OnInit {
         maintenance.goal *= 3600;
       }
       await this._maintenanceService.setMaitenance(this._tokenService.userId, maintenance);
-      this._router.navigateByUrl('maintenance');
+      this.navigateBackToList();
     } else {
       this.form.markAllAsTouched();
       return await Promise.resolve(false);
@@ -150,8 +150,16 @@ export class MaintenanceFormComponent implements OnInit {
       autoFocus: false
     });
 
-    this.matDialogRef.afterClosed().subscribe((confirm) => {
+    this.matDialogRef.afterClosed().subscribe(async (confirm) => {
       if(confirm) {
+        const deletionResult = await this._maintenanceService
+          .deleteMaintenance(this.id?.value)
+          .then(() => true)
+          .catch(() => false);
+
+        if(deletionResult) {
+          this.navigateBackToList();
+        }
         console.log('deleting object ', this.id?.value);
       }
     });
@@ -159,9 +167,13 @@ export class MaintenanceFormComponent implements OnInit {
 
   onCancel() {
     if(confirm('Are you sure that you want to leave the page without saving the changes?')) {
-      const urlTree = this._router.createUrlTree(['/maintenance']);
-      this._router.navigateByUrl(urlTree);
+      this.navigateBackToList();
     }
+  }
+
+  navigateBackToList() {
+    const urlTree = this._router.createUrlTree(['/maintenance']);
+    this._router.navigateByUrl(urlTree);
   }
 
   get form() {
