@@ -3,12 +3,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Maintenance } from '../interfaces/maintenance';
 import { Collections } from '../enums/collections';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MaintenanceService {
-  constructor(private _firestore: AngularFirestore) {}
+  constructor(
+    private _firestore: AngularFirestore,
+    private _tokenService: TokenService
+    ) {}
 
   async setMaitenance(
     userId: number,
@@ -50,5 +54,14 @@ export class MaintenanceService {
         doc?.exists ? { id: maintenanceId, ...doc.data() } : null
       )
       .catch((_) => null);
+  }
+
+  async deleteMaintenance(maintenanceId: number): Promise<any> {
+    return this._firestore
+      .collection(Collections.USERS)
+      .doc(`${this._tokenService.userId}`)
+      .collection(Collections.MAINTENANCES)
+      .doc(`${maintenanceId}`)
+      .delete();
   }
 }

@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const declarations = [
 
@@ -22,6 +23,7 @@ const exports = [
 
 const imports = [
     MatButtonModule,
+    MatDialogModule,
     MatCardModule,
     MatIconModule,
     MatInputModule,

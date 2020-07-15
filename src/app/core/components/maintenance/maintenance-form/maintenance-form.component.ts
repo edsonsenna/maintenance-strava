@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 import * as MaintenanceTypesJson from "../../../mocks/maintenance-values.json";
 import { TokenService } from '../../../services/token.service';
 import { MaintenanceService } from '../../../services/maintenance.service';
 import { Maintenance } from '../../../interfaces/maintenance';
 import { MaintenanceTypes } from '../../../enums/maintenance-types';
+import { QuestionDialogComponent } from '../../question-dialog/question-dialog.component';
 
 @Component({
   selector: 'ms-maintenance-form',
@@ -19,6 +21,7 @@ export class MaintenanceFormComponent implements OnInit {
 
   private maintenanceForm: FormGroup = null;
   private equipmentsArr: any[] = [];
+  private matDialogRef: MatDialogRef<QuestionDialogComponent> = null;
   
   public types: any[] = MaintenanceTypesJson.values.types;
   public typesEnum: typeof MaintenanceTypes = MaintenanceTypes;
@@ -30,6 +33,7 @@ export class MaintenanceFormComponent implements OnInit {
     private _tokenService: TokenService,
     private _maintenanceService: MaintenanceService,
     private _router: Router,
+    private _matDialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -53,6 +57,8 @@ export class MaintenanceFormComponent implements OnInit {
       value: [this.maintenance?.value || 0],
       isValid: [this.maintenance?.isValid || true]
     });
+
+    console.log(this.maintenance);
   }
 
   getAndParseEquipments() {
@@ -123,7 +129,7 @@ export class MaintenanceFormComponent implements OnInit {
         maintenance.goal *= 3600;
       }
       await this._maintenanceService.setMaitenance(this._tokenService.userId, maintenance);
-      this._router.navigateByUrl('maintenance');
+      this.navigateBackToList();
     } else {
       this.form.markAllAsTouched();
       return await Promise.resolve(false);
@@ -131,8 +137,63 @@ export class MaintenanceFormComponent implements OnInit {
     
   }
 
+  async onDelete(){
+    this.matDialogRef = this._matDialog.open(QuestionDialogComponent, {
+      data: {
+        title: 'maintenance.delete.title',
+        objectId: this.id?.value,
+        question: 'maintenance.delete.question',
+        denyButtonText: 'shared.buttons.no',
+        allowButtonText: 'shared.buttons.yes'
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    this.matDialogRef.afterClosed().subscribe(async (confirm) => {
+      if(confirm) {
+        const deletionResult = await this._maintenanceService
+          .deleteMaintenance(this.id?.value)
+          .then(() => true)
+          .catch(() => false);
+
+        if(deletionResult) {
+          this.navigateBackToList();
+        }
+      }
+    });
+  }
+
+  onCancel() {
+    this.matDialogRef = this._matDialog.open(QuestionDialogComponent, {
+      data: {
+        title: 'shared.question.cancel.title',
+        question: 'shared.question.cancel.question',
+        denyButtonText: 'shared.buttons.no',
+        allowButtonText: 'shared.buttons.yes'
+      },
+      disableClose: true,
+      autoFocus: false
+    });
+
+    this.matDialogRef.afterClosed().subscribe(async (confirm) => {
+      if(confirm) {
+        this.navigateBackToList();
+      }
+    });
+  }
+
+  navigateBackToList() {
+    const urlTree = this._router.createUrlTree(['/maintenance']);
+    this._router.navigateByUrl(urlTree);
+  }
+
   get form() {
     return this.maintenanceForm;
+  }
+  
+  get id() {
+    return this.maintenanceForm?.get('id') || null;
   }
 
   get name() {

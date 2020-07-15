@@ -18,6 +18,15 @@
     width: 100%;
 }
 
+.mat-raised-button.mat-primary {
+    background-color: green;
+    margin-left: 0;
+}
+
+.mat-raised-button.mat-accent {
+    color: #fff;
+}
+
 @media screen and (max-width: 540px) {
     .form-card {
         min-width: 300px;
