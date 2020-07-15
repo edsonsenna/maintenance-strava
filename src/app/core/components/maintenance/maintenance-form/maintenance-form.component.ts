@@ -57,8 +57,6 @@ export class MaintenanceFormComponent implements OnInit {
       value: [this.maintenance?.value || 0],
       isValid: [this.maintenance?.isValid || true]
     });
-
-    console.log(this.maintenance);
   }
 
   getAndParseEquipments() {
