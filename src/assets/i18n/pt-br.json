@@ -69,7 +69,9 @@
             "maintenanceName": "Ex. Troca da Corrente"
         },
         "errors": {
-            "required": "*Campo obrigatório."
+            "required": "*Campo obrigatório.",
+            "login": "Erro ao realizar login via Strava. Tente novamente.",
+            "invalidScope": "Escopo inválido fornecido. Tente novamente."
         },
         "question": {
             "cancel": {
