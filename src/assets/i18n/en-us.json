@@ -49,7 +49,8 @@
             "back": "Back",
             "login": "Login with Strava",
             "yes": "Yes",
-            "no": "No"
+            "no": "No",
+            "close": "Close"
         },
         "inputTitles": {
             "bikes": "Bikes",
@@ -69,7 +70,9 @@
             "maintenanceName": "Ex. Chain Change"
         },
         "errors": {
-            "required": "*Required field."
+            "required": "*Required field.",
+            "login": "Error trying to do login via Strava. Try again.",
+            "invalidScope": "Invalid scope provided. Try again."
         },
         "question": {
             "cancel": {
