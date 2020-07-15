@@ -49,7 +49,8 @@
             "back": "Voltar",
             "login": "Entrar com Strava",
             "yes": "Sim",
-            "no": "Não"
+            "no": "Não",
+            "close": "Fechar"
         },
         "inputTitles": {
             "bikes": "Bicicletas",

@@ -14,6 +14,7 @@ import { TokenResponse } from '../interfaces/token-response';
 import { TokenValues } from '../enums/token-values';
 import { StravaService } from '../services/strava.service';
 import { Collections } from '../enums/collections';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class LoginGuard implements CanActivate {
     private _stravaService: StravaService,
     private _tokenService: TokenService,
     private _router: Router,
-    private _firestore: AngularFirestore
+    private _firestore: AngularFirestore,
+    private _notificationService: NotificationService
   ) {}
 
   async canActivate(
@@ -31,6 +33,15 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
     if (Object.keys(next.queryParams).length) {
+      let isInvalid = false;
+      if(next?.queryParams?.error) {
+        this._notificationService.showNotification('login');
+        isInvalid = true;
+      } else if(next?.queryParams?.scope != 'read,activity:read_all,profile:read_all') {
+        this._notificationService.showNotification('invalidScope');
+        isInvalid = true;
+      }
+      if(isInvalid) return this._router.createUrlTree(['/login']);
       await this.getUserToken(next.queryParams?.code, next.queryParams?.scope);
     } else if (!this._tokenService.isTokenValid && this._tokenService.userId) {
       let refreshToken = null;
