@@ -56,10 +56,10 @@
         </mat-card-content>
         <mat-card-actions align="end">
             <span [hidden]="!this.id?.value">
-                <button mat-raised-button color="warn" (click)="onDelete()"><mat-icon>delete</mat-icon>{{  'shared.buttons.delete' | translate }}</button>
+                <button mat-raised-button color="warn" (click)="onDelete()"><mat-icon class="button-icon">delete</mat-icon>{{  'shared.buttons.delete' | translate }}</button>
             </span>
-            <button mat-raised-button color="accent" (click)="onCancel()"><mat-icon>close</mat-icon>{{  'shared.buttons.cancel' | translate }}</button>
-            <button mat-raised-button color="primary" (click)="onSubmit()"><mat-icon>done</mat-icon>{{ 'shared.buttons.' + (this.maintenance?.id ? 'update' : 'create') | translate }}</button>
+            <button mat-raised-button color="accent" (click)="onCancel()"><mat-icon class="button-icon">close</mat-icon>{{  'shared.buttons.cancel' | translate }}</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()"><mat-icon class="button-icon">done</mat-icon>{{ 'shared.buttons.' + (this.maintenance?.id ? 'update' : 'create') | translate }}</button>
         </mat-card-actions>
     </mat-card>
 </div>
