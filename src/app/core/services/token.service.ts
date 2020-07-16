@@ -41,6 +41,11 @@ export class TokenService {
         return user?.id ? user.id : null;
     }
 
+    get userFirstName() {
+        const user = JSON.parse(localStorage.getItem(TokenValues.ATHLETE_INFO_KEY) || null);
+        return user?.id ? user.firstname : null;
+    }
+
 
     get hasToken() {
         return !!localStorage.getItem(TokenValues.TOKEN_KEY);

@@ -22,7 +22,7 @@
 }
 
 .content > .create-button {
-    position: absolute;
+    position: fixed;
     right: 15px;
     bottom: 30px;
 }

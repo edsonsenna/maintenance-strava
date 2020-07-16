@@ -39,7 +39,8 @@
     },
     "shared": {
         "app": {
-            "name": "Maintenances Strava"
+            "name": "Maintenances Strava",
+            "welcome": "Welcome"
         },
         "buttons": {
             "create": "Create",
