@@ -108,7 +108,7 @@ export class LoginGuard implements CanActivate {
             this._firestore
               .collection(Collections.USERS)
               .doc(`${athlete.id}`)
-              .update({
+              .set({
                 ...infoToBeAdd,
               });
           }
