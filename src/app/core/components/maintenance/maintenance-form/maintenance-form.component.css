@@ -19,7 +19,7 @@
 }
 
 .mat-raised-button.mat-primary {
-    background-color: green;
+    background-color: green !important;
     margin-left: 0;
 }
 
@@ -30,5 +30,9 @@
 @media screen and (max-width: 540px) {
     .form-card {
         min-width: 300px;
+    }
+
+    .button-icon {
+        display: none;
     }
 }

@@ -28,14 +28,10 @@ export class HomeComponent implements OnInit {
   private athlete: Athlete = null;
   private user: User = null;
 
-  public isLoader: boolean;
+  public isLoader: boolean = false;
   public mobileQuery: MediaQueryList; 
   public title = 'maintenance-strava';
   public menuOptions = [
-    {
-      path: '/home',
-      name: 'home'
-    },
     {
       path: '/maintenance',
       name: 'maintenances'
@@ -46,12 +42,8 @@ export class HomeComponent implements OnInit {
   private _routerSubscription: Subscription = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private _stravaService: StravaService,
-    private cookieService: CookieService,
-    private userService: UserService,
-    private tokenService: TokenService,
-    private _firestore: AngularFirestore,
+    private _userService: UserService,
+    private _tokenService: TokenService,
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private _router: Router
@@ -82,9 +74,13 @@ export class HomeComponent implements OnInit {
   }
 
   exit() {
-    this.tokenService.clearAllTokens();
+    this._tokenService.clearAllTokens();
     const urlTree = this._router.createUrlTree(['login']);
     this._router.navigateByUrl(urlTree);
+  }
+
+  get userFirstName() {
+    return this._tokenService.userFirstName;
   }
 
 }

@@ -3,14 +3,14 @@
         {{ 'maintenance.list.title' | translate }}
     </div>
     <div class="list">
-        <mat-card class="card" *ngFor="let maintenance of maintenances | async" [routerLink]="'/maintenance/create/' + maintenance.id">
-            <mat-card-title>{{ maintenance.name }} </mat-card-title>
+        <mat-card class="card" [style.background-color]="maintenance?.isValid ? '#00800094' : '#ff23239e'" *ngFor="let maintenance of maintenances | async" [routerLink]="'/maintenance/create/' + maintenance.id">
+            <mat-card-title>{{ maintenance?.name }}</mat-card-title>
             <mat-card-content>
               <div>
                 {{ 'maintenance.card.equipmentName' | translate }}: {{ maintenance?.equipmentName }}
               </div>
 
-              <div *ngIf="maintenance.type === 'distance'">
+              <div *ngIf="maintenance?.type === 'distance'">
                 <div>
                   {{ 'maintenance.card.distance.actual' | translate }}: {{ ((maintenance?.value) / 1000).toFixed(0) | mask:'separator.2':'.' }} {{ 'maintenance.card.distance.unit' | translate }}
                 </div>
@@ -26,6 +26,9 @@
               </div>
 
               <div *ngIf="maintenance.type === 'hours'">
+                <div>
+                  {{ 'maintenance.card.hours.actual' | translate }}: {{ (maintenance?.value / 3600).toFixed(0) | mask:'separator.2':'.'}}
+                </div>
                 <div>
                   {{ 'maintenance.card.hours.goal' | translate }}: {{ (maintenance?.goal / 3600).toFixed(0) | mask:'separator.2':'.'}}
                 </div>

@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  firebaseConfig: {},
-  stravaConfig: {},
-};
+    production: true,
+    firebaseConfig: {},
+    stravaConfig: {},
+}

@@ -19,12 +19,13 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.inputTitles.bikes' | translate}}</mat-label>
+                <mat-label>{{ 'shared.inputTitles.equipment' | translate}}</mat-label>
                 <mat-select formControlName="equipmentId" (selectionChange)="onEquipmentSelect();">
                     <mat-option *ngFor="let equipment of equipments" [value]="equipment.id">{{ equipment.name }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="this.equipment.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
+                <mat-error *ngIf="this.equipment.hasError('required') && !this.equipment.hasError('empty')">{{ 'shared.errors.required' | translate }}</mat-error>
+                <mat-error *ngIf="this.equipment.hasError('empty')">{{ 'shared.errors.empty' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-field" *ngIf="!this.type?.value || this.type?.value === this.typesEnum?.DISTANCE" >
@@ -55,10 +56,10 @@
         </mat-card-content>
         <mat-card-actions align="end">
             <span [hidden]="!this.id?.value">
-                <button mat-raised-button color="warn" (click)="onDelete()"><mat-icon>delete</mat-icon>{{  'shared.buttons.delete' | translate }}</button>
+                <button mat-raised-button color="warn" (click)="onDelete()"><mat-icon class="button-icon">delete</mat-icon>{{  'shared.buttons.delete' | translate }}</button>
             </span>
-            <button mat-raised-button color="accent" (click)="onCancel()"><mat-icon>close</mat-icon>{{  'shared.buttons.cancel' | translate }}</button>
-            <button mat-raised-button color="primary" (click)="onSubmit()"><mat-icon>done</mat-icon>{{ 'shared.buttons.' + (this.maintenance?.id ? 'update' : 'create') | translate }}</button>
+            <button mat-raised-button color="accent" (click)="onCancel()"><mat-icon class="button-icon">close</mat-icon>{{  'shared.buttons.cancel' | translate }}</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()"><mat-icon class="button-icon">done</mat-icon>{{ 'shared.buttons.' + (this.maintenance?.id ? 'update' : 'create') | translate }}</button>
         </mat-card-actions>
     </mat-card>
 </div>

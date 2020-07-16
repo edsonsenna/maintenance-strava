@@ -28,6 +28,7 @@
                 "goal": "Data Troca"
             },
             "hours": {
+                "actual": "Horas de Uso",
                 "goal": "Horas para Troca",
                 "unit": {
                     "singular": "Hora",
@@ -39,7 +40,9 @@
     },
     "shared": {
         "app": {
-            "name": "Manutenções Strava"
+            "name": "Manutenções Strava",
+            "welcome": "Bem vindo",
+            "loading": "Carregando..."
         },
         "buttons": {
             "create": "Criar",
@@ -54,6 +57,7 @@
         },
         "inputTitles": {
             "bikes": "Bicicletas",
+            "equipment": "Equipamento",
             "equipmentDistance": "Quilometragem do Equipamento",
             "maintenance": {
                 "type": "Tipo da Manutenção",
@@ -71,7 +75,8 @@
         "errors": {
             "required": "*Campo obrigatório.",
             "login": "Erro ao realizar login via Strava. Tente novamente.",
-            "invalidScope": "Escopo inválido fornecido. Tente novamente."
+            "invalidScope": "Escopo inválido fornecido. Tente novamente.",
+            "empty": "Não existem items cadastrados."
         },
         "question": {
             "cancel": {

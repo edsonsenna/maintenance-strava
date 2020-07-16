@@ -3,9 +3,8 @@
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="app-name">{{ this.title }}</h1>
+        <h1 class="app-name">{{'shared.app.welcome' | translate }}{{ (this.userFirstName ? ', '+this.userFirstName: '!') }}</h1>
     </mat-toolbar>
-
     <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
         <mat-sidenav #snav mode="over" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
             <mat-nav-list>
@@ -18,7 +17,10 @@
 
         <mat-sidenav-content>
             <div class="loader" *ngIf="isLoader">
-                <div>Loading...</div>
+                <div class="spinner">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <div class="message">{{ 'shared.app.loading' | translate }}</div>
             </div>
             <router-outlet></router-outlet>
         </mat-sidenav-content>
