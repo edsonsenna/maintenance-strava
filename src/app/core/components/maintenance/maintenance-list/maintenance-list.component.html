@@ -27,6 +27,9 @@
 
               <div *ngIf="maintenance.type === 'hours'">
                 <div>
+                  {{ 'maintenance.card.hours.actual' | translate }}: {{ (maintenance?.value / 3600).toFixed(0) | mask:'separator.2':'.'}}
+                </div>
+                <div>
                   {{ 'maintenance.card.hours.goal' | translate }}: {{ (maintenance?.goal / 3600).toFixed(0) | mask:'separator.2':'.'}}
                 </div>
               </div>

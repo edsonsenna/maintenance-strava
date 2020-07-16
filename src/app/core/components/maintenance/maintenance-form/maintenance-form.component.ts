@@ -46,14 +46,16 @@ export class MaintenanceFormComponent implements OnInit {
 
     const goalValue = this.maintenance?.type === this.typesEnum?.DATE ? new Date(this.maintenance?.goal) : this.maintenance?.goal;
 
+    const disabled = this.maintenance?.id ? !this.maintenance?.isValid : false;
+
     this.maintenanceForm = this._formBuilder.group({
-      id: [this.maintenance?.id || null],
-      type: [this.maintenance?.type || null, Validators.required],
-      name: [this.maintenance?.name || null, Validators.required],
-      equipmentId: [this.maintenance?.equipmentId || null, [Validators.required, this.hasItems(this.equipmentsArr)]],
+      id: [this.maintenance?.id],
+      type: [{ value: this.maintenance?.type || null, disabled}, Validators.required],
+      name: [{ value: this.maintenance?.name || null, disabled}, Validators.required],
+      equipmentId: [{ value: this.maintenance?.equipmentId || null, disabled}, [Validators.required, this.hasItems(this.equipmentsArr)]],
       equipmentDistance: [{ value: this.maintenance?.equipmentDistance || null, disabled: true}, Validators.required],
       equipmentName: [{ value: this.maintenance?.equipmentName || null, disabled: true}, Validators.required],
-      goal: [goalValue || null, Validators.required],
+      goal: [{ value: goalValue, disabled} || null, Validators.required],
       value: [this.maintenance?.value || 0],
       isValid: [this.maintenance?.isValid || true]
     });

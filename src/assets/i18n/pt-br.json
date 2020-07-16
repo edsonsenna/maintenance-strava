@@ -28,6 +28,7 @@
                 "goal": "Data Troca"
             },
             "hours": {
+                "actual": "Horas de Uso",
                 "goal": "Horas para Troca",
                 "unit": {
                     "singular": "Hora",

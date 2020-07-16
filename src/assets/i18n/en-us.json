@@ -29,6 +29,7 @@
             },
             "hours": {
                 "goal": "Goal Hours",
+                "actual": "Usage Hours",
                 "unit": {
                     "singular": "Hour",
                     "plural": "Hours"
