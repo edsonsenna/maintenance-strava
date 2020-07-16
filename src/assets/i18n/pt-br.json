@@ -56,6 +56,7 @@
         },
         "inputTitles": {
             "bikes": "Bicicletas",
+            "equipment": "Equipamento",
             "equipmentDistance": "Quilometragem do Equipamento",
             "maintenance": {
                 "type": "Tipo da Manutenção",
@@ -73,7 +74,8 @@
         "errors": {
             "required": "*Campo obrigatório.",
             "login": "Erro ao realizar login via Strava. Tente novamente.",
-            "invalidScope": "Escopo inválido fornecido. Tente novamente."
+            "invalidScope": "Escopo inválido fornecido. Tente novamente.",
+            "empty": "Não existem items cadastrados."
         },
         "question": {
             "cancel": {

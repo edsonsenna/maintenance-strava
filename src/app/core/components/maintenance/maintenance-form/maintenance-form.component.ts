@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
@@ -50,7 +50,7 @@ export class MaintenanceFormComponent implements OnInit {
       id: [this.maintenance?.id || null],
       type: [this.maintenance?.type || null, Validators.required],
       name: [this.maintenance?.name || null, Validators.required],
-      equipmentId: [this.maintenance?.equipmentId || null, Validators.required],
+      equipmentId: [this.maintenance?.equipmentId || null, [Validators.required, this.hasItems(this.equipmentsArr)]],
       equipmentDistance: [{ value: this.maintenance?.equipmentDistance || null, disabled: true}, Validators.required],
       equipmentName: [{ value: this.maintenance?.equipmentName || null, disabled: true}, Validators.required],
       goal: [goalValue || null, Validators.required],
@@ -65,6 +65,7 @@ export class MaintenanceFormComponent implements OnInit {
       equipment.distance = (equipment.distance / 1000).toFixed(0);
       return equipment;
     });
+
   }
 
   getAndParseMaintenance() {
@@ -184,6 +185,12 @@ export class MaintenanceFormComponent implements OnInit {
   navigateBackToList() {
     const urlTree = this._router.createUrlTree(['/maintenance']);
     this._router.navigateByUrl(urlTree);
+  }
+
+  hasItems(itemsArr: any[]): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      return itemsArr?.length ? null : {'empty': true};
+    };
   }
 
   get form() {

@@ -19,12 +19,13 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-field">
-                <mat-label>{{ 'shared.inputTitles.bikes' | translate}}</mat-label>
+                <mat-label>{{ 'shared.inputTitles.equipment' | translate}}</mat-label>
                 <mat-select formControlName="equipmentId" (selectionChange)="onEquipmentSelect();">
                     <mat-option *ngFor="let equipment of equipments" [value]="equipment.id">{{ equipment.name }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="this.equipment.hasError('required')">{{ 'shared.errors.required' | translate }}</mat-error>
+                <mat-error *ngIf="this.equipment.hasError('required') && !this.equipment.hasError('empty')">{{ 'shared.errors.required' | translate }}</mat-error>
+                <mat-error *ngIf="this.equipment.hasError('empty')">{{ 'shared.errors.empty' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-field" *ngIf="!this.type?.value || this.type?.value === this.typesEnum?.DISTANCE" >
