@@ -4,7 +4,7 @@
     </div>
     <div class="list">
         <mat-card class="card" [style.background-color]="maintenance?.isValid ? '#00800094' : '#ff23239e'" *ngFor="let maintenance of maintenances | async" [routerLink]="'/maintenance/create/' + maintenance.id">
-            <mat-card-title>{{ maintenance?.name }} {{ maintenance?.isValid}}</mat-card-title>
+            <mat-card-title>{{ maintenance?.name }}</mat-card-title>
             <mat-card-content>
               <div>
                 {{ 'maintenance.card.equipmentName' | translate }}: {{ maintenance?.equipmentName }}

@@ -40,7 +40,8 @@
     "shared": {
         "app": {
             "name": "Maintenances Strava",
-            "welcome": "Welcome"
+            "welcome": "Welcome",
+            "loading": "Loading..."
         },
         "buttons": {
             "create": "Create",

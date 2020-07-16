@@ -1,18 +1,19 @@
-import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgModule } from '@angular/core';
 
 const declarations = [
 
@@ -24,19 +25,20 @@ const exports = [
 
 const imports = [
     MatButtonModule,
-    MatDialogModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatDialogModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatSnackBarModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
+    MatSnackBarModule,
     MatToolbarModule,
-    MatDatepickerModule,
-    MatNativeDateModule
 ];
 
 

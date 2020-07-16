@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   private athlete: Athlete = null;
   private user: User = null;
 
-  public isLoader: boolean;
+  public isLoader: boolean = false;
   public mobileQuery: MediaQueryList; 
   public title = 'maintenance-strava';
   public menuOptions = [
