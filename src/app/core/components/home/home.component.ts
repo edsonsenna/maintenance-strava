@@ -33,10 +33,6 @@ export class HomeComponent implements OnInit {
   public title = 'maintenance-strava';
   public menuOptions = [
     {
-      path: '/home',
-      name: 'home'
-    },
-    {
       path: '/maintenance',
       name: 'maintenances'
     }

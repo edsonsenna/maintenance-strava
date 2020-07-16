@@ -19,7 +19,7 @@
 }
 
 .mat-raised-button.mat-primary {
-    background-color: green;
+    background-color: green !important;
     margin-left: 0;
 }
 
