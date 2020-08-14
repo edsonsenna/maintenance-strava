@@ -6,6 +6,7 @@ import { MaintenanceListComponent } from '../maintenance/maintenance-list/mainte
 import { MaintenanceFormComponent } from '../maintenance/maintenance-form/maintenance-form.component';
 import { EquipmentResolver } from '../../resolvers/equipment.resolver';
 import { MaintenanceResolver } from '../../resolvers/maintenance.resolver';
+import { UserDetailComponent } from '../user/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
           maintenance: MaintenanceResolver,
         },
       },
+      {
+        path: 'user',
+        component: UserDetailComponent
+      }
     ],
   }
 ];

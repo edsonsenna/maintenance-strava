@@ -88,6 +88,7 @@
     "menuOptions": {
         "home": "Home",
         "maintenances": "Manutenções",
+        "user": "Meu Perfil",
         "exit": "Sair"
     }
 }

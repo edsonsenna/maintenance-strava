@@ -35,6 +35,10 @@ export class HomeComponent implements OnInit {
     {
       path: '/maintenance',
       name: 'maintenances'
+    },
+    {
+      path: '/user',
+      name: 'user'
     }
   ]
   
