@@ -89,6 +89,7 @@
     "menuOptions": {
         "home": "Home",
         "maintenances": "Maintenances",
+        "user": "My Profile",
         "exit": "Exit"
     }
 }
