@@ -6,9 +6,11 @@ import { HomeComponent } from './home.component';
 import { AngularMaterialModule } from '../../modules/angular-material.module';
 import { HomeRoutingModule } from './home-routing.modules';
 import { MaintenanceModule } from '../maintenance/maintenance.module';
+import { UserDetailComponent } from '../user/user-detail/user-detail.component';
 
 const declarations = [
     HomeComponent,
+    UserDetailComponent
 ]
 
 const imports = [

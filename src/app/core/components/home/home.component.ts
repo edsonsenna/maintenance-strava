@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
       name: 'maintenances'
     },
     {
-      path: '/user',
+      path: '/my-info',
       name: 'user'
     }
   ]
