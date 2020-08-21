@@ -7,6 +7,7 @@ import { AngularMaterialModule } from '../../modules/angular-material.module';
 import { HomeRoutingModule } from './home-routing.modules';
 import { MaintenanceModule } from '../maintenance/maintenance.module';
 import { UserDetailComponent } from '../user/user-detail/user-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const declarations = [
     HomeComponent,
@@ -16,6 +17,7 @@ const declarations = [
 const imports = [
     AngularMaterialModule,
     CommonModule,
+    ReactiveFormsModule, // Remove and migrate to new user module
     HomeRoutingModule,
     MaintenanceModule,
     TranslateModule.forChild()
