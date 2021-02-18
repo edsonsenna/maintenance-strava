@@ -11,6 +11,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "paths": {
+      "@enums/*": ["src/app/core/enums/*"],
+      "@interfaces/*": ["src/app/core/interfaces/*"],
+      "@services/*": ["src/app/core/services/*"],
+    },
     "lib": [
       "es2018",
       "dom"

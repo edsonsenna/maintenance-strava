@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '@interfaces/user';
 
 @Component({
   selector: 'ms-user-detail',
@@ -9,13 +11,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UserDetailComponent implements OnInit {
 
   private _userForm: FormGroup = null;
+  private _userDetail: User = null;
 
   constructor(
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.receiveUserDetail();
     this.createReactiveForm();
+  }
+
+  receiveUserDetail() {
+    this._userDetail = this._route?.snapshot?.data?.userDetail || null;
+    console.log(this._userDetail);
   }
 
   createReactiveForm() {

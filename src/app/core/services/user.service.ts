@@ -5,7 +5,7 @@ import { User } from '../interfaces/user';
 
 const COLLECTION_USERS = 'users';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(private _firestore: AngularFirestore) {}
 
@@ -27,7 +27,7 @@ export class UserService {
   async findUserById(userId: string): Promise<User> {
     let user: User = await this._firestore
       .collection(COLLECTION_USERS)
-      .doc(userId)
+      .doc(`${userId}`)
       .get()
       .toPromise()
       .then((doc) => (doc.exists ? <User>doc.data() : null))

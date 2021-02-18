@@ -7,6 +7,7 @@ import { MaintenanceFormComponent } from '../maintenance/maintenance-form/mainte
 import { EquipmentResolver } from '../../resolvers/equipment.resolver';
 import { MaintenanceResolver } from '../../resolvers/maintenance.resolver';
 import { UserDetailComponent } from '../user/user-detail/user-detail.component';
+import { UserDetailResolver } from '../../resolvers/user-detail.resolver';
 
 const routes: Routes = [
   {
@@ -34,7 +35,10 @@ const routes: Routes = [
       },
       {
         path: 'my-info',
-        component: UserDetailComponent
+        component: UserDetailComponent,
+        resolve: {
+          userDetail: UserDetailResolver
+        }
       }
     ],
   }

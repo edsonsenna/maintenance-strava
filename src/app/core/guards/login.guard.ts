@@ -9,17 +9,24 @@ import {
 import { AngularFirestore } from '@angular/fire/firestore';
 import { tap } from 'rxjs/operators';
 
-import { TokenService } from '../services/token.service';
-import { TokenResponse } from '../interfaces/token-response';
-import { TokenValues } from '../enums/token-values';
-import { StravaService } from '../services/strava.service';
-import { Collections } from '../enums/collections';
-import { NotificationService } from '../services/notification.service';
+import { TokenService } from '@services/token.service';
+import { TokenResponse } from '@interfaces/token-response';
+import { TokenValues } from '@enums/token-values';
+import { StravaService } from '@services/strava.service';
+import { Collections } from '@enums/collections';
+import { NotificationService } from '@services/notification.service';
+import { UserDetail } from '@interfaces/user-detail';
+import { UserDetails } from '@enums/user-details';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
+  private userDetail: UserDetail = {
+    [UserDetails.EMAIL_KEY]: '',
+    [UserDetails.FULLNAME_KEY]: '',
+    [UserDetails.BIRTHDAY_KEY]: null,
+  };
   constructor(
     private _stravaService: StravaService,
     private _tokenService: TokenService,
@@ -34,14 +41,16 @@ export class LoginGuard implements CanActivate {
   ): Promise<boolean | UrlTree> {
     if (Object.keys(next.queryParams).length) {
       let isInvalid = false;
-      if(next?.queryParams?.error) {
+      if (next?.queryParams?.error) {
         this._notificationService.showNotification('login');
         isInvalid = true;
-      } else if(next?.queryParams?.scope != 'read,activity:read_all,profile:read_all') {
+      } else if (
+        next?.queryParams?.scope != 'read,activity:read_all,profile:read_all'
+      ) {
         this._notificationService.showNotification('invalidScope');
         isInvalid = true;
       }
-      if(isInvalid) return this._router.createUrlTree(['/login']);
+      if (isInvalid) return this._router.createUrlTree(['/login']);
       await this.getUserToken(next.queryParams?.code, next.queryParams?.scope);
     } else if (!this._tokenService.isTokenValid && this._tokenService.userId) {
       let refreshToken = null;
@@ -54,12 +63,19 @@ export class LoginGuard implements CanActivate {
             if (doc.exists) {
               const data = doc.data();
               refreshToken = data[TokenValues.REFRESH_KEY];
+              this.userDetail[UserDetails.EMAIL_KEY] =
+                data[UserDetails.EMAIL_KEY] || null;
+              this.userDetail[UserDetails.FULLNAME_KEY] =
+                data[UserDetails.FULLNAME_KEY] || null;
+              this.userDetail[UserDetails.BIRTHDAY_KEY] =
+                data[UserDetails.BIRTHDAY_KEY] || null;
             }
           })
         )
         .toPromise();
 
       if (refreshToken) {
+        console.log(this.userDetail);
         await this._stravaService
           .getAuthTokenByRefresh(refreshToken)
           .pipe(
@@ -67,11 +83,17 @@ export class LoginGuard implements CanActivate {
               (response: TokenResponse) => {
                 if (response?.access_token) {
                   const infoToBeAdd = this.parseResponse(response);
+                  this.userDetail[UserDetails.FULLNAME_KEY] =
+                    this.userDetail[UserDetails.FULLNAME_KEY] ||
+                    `${
+                      infoToBeAdd[TokenValues.ATHLETE_INFO_KEY]['firstname']
+                    } ${infoToBeAdd[TokenValues.ATHLETE_INFO_KEY]['lastname']}`;
                   this._firestore
                     .collection(Collections.USERS)
                     .doc(`${this._tokenService.userId}`)
                     .update({
                       ...infoToBeAdd,
+                      ...this.userDetail,
                     });
                   this._tokenService.save(response);
                 }
@@ -105,11 +127,18 @@ export class LoginGuard implements CanActivate {
           if (response.athlete) {
             athlete = response.athlete;
             const infoToBeAdd = this.parseResponse(response);
+            this.userDetail[UserDetails.FULLNAME_KEY] =
+              this.userDetail[UserDetails.FULLNAME_KEY] ||
+              `${infoToBeAdd[TokenValues.ATHLETE_INFO_KEY]['firstname']} ${
+                infoToBeAdd[TokenValues.ATHLETE_INFO_KEY]['lastname']
+              }`;
+            console.log(this.userDetail);
             this._firestore
               .collection(Collections.USERS)
               .doc(`${athlete.id}`)
               .set({
                 ...infoToBeAdd,
+                ...this.userDetail,
               });
           }
           this._tokenService.save(response);
