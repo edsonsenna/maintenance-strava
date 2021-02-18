@@ -7,55 +7,49 @@ const COLLECTION_USERS = 'users';
 
 @Injectable()
 export class UserService {
+  constructor(private _firestore: AngularFirestore) {}
 
-    constructor(private _firestore: AngularFirestore) {}
+  async createUser(user: User): Promise<boolean> {
+    return await this._firestore
+      .collection(COLLECTION_USERS)
+      .doc(`${user.athlete.id}`)
+      .set(user)
+      .then(
+        (res) => {
+          return true;
+        },
+        (err) => {
+          return false;
+        }
+      );
+  }
 
-    async createUser(user: User): Promise<boolean> {
-        return await this._firestore
-            .collection(COLLECTION_USERS)
-            .doc(`${user.athlete.id}`)
-            .set(user)
-            .then(res => {
-                return true;
-            },
-            err => {
-                return false;
-            })
-    }
-
-    async findUserById(userId: string): Promise<User> {
-        let user:User = await this._firestore
-        .collection(COLLECTION_USERS)
-        .doc(userId)
-        .get()
-        .toPromise()
-        .then((doc) => 
-                doc.exists 
-                    ? <User>doc.data() 
-                    : null)
-        .catch(err => {
-            return null;
-        });
-
-        return user;
-    }
-
-    async updateUser(userId: string, bikes: []): Promise<boolean> {
-
-        return await this._firestore
-        .collection(COLLECTION_USERS)
-        .doc(`${userId}`)
-        .update({
-            "bikes": bikes
-        })
-        .then(() => true)
-        .catch(() => false);
-
-        
-    }
-
-    async getRefreshToken(userId: string): Promise<boolean> {
+  async findUserById(userId: string): Promise<User> {
+    let user: User = await this._firestore
+      .collection(COLLECTION_USERS)
+      .doc(userId)
+      .get()
+      .toPromise()
+      .then((doc) => (doc.exists ? <User>doc.data() : null))
+      .catch((err) => {
         return null;
-    }
-    
+      });
+
+    return user;
+  }
+
+  async updateUser(userId: string, bikes: []): Promise<boolean> {
+    return await this._firestore
+      .collection(COLLECTION_USERS)
+      .doc(`${userId}`)
+      .update({
+        bikes: bikes,
+      })
+      .then(() => true)
+      .catch(() => false);
+  }
+
+  async getRefreshToken(userId: string): Promise<boolean> {
+    return null;
+  }
 }
