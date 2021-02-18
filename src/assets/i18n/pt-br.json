@@ -38,6 +38,13 @@
 
         }
     },
+    "user": {
+        "detail": {
+            "form": {
+                "title": "Minhas Informações"
+            }
+        }
+    },
     "shared": {
         "app": {
             "name": "Manutenções Strava",
@@ -67,10 +74,15 @@
                     "hours": "Horas de Uso para Troca"
                 }
             },
-            "name": "Nome"
+            "name": "Nome",
+            "birthdate": "Data de Nascimento",
+            "email": "Email"
         },
         "placeholders": {
-            "maintenanceName": "Ex. Troca da Corrente"
+            "maintenanceName": "Ex. Troca da Corrente",
+            "name": "João da Silva",
+            "birthdate": "11/04/1997",
+            "email": "joaosilva@mail.com"
         },
         "errors": {
             "required": "*Campo obrigatório.",

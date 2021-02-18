@@ -1,1 +1,38 @@
-<p>user-detail works!</p>
+<div class="content">
+    <mat-card>
+        <mat-card-title>
+            <div>
+                {{ 'user.detail.form.title' | translate }}
+            </div>
+        </mat-card-title>
+        <mat-card-content *ngIf="form">
+            <form [formGroup]="this.form">
+               
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>{{ 'shared.inputTitles.name' | translate }}</mat-label>
+                    <input matInput [placeholder]="('shared.placeholders.name' | translate)" 
+                    formControlName="name" id="name">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>{{ 'shared.inputTitles.email' | translate }}</mat-label>
+                    <input matInput [placeholder]="('shared.placeholders.email' | translate)"
+                    id="email" formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>{{ 'shared.inputTitles.birthdate' | translate}}</mat-label>
+                    <input matInput [matDatepicker]="birthdatePicker" (click)="birthdatePicker.open()"
+                    id="birthday" formControlName="birthday">
+                    <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #birthdatePicker></mat-datepicker>
+                  </mat-form-field>
+                
+            </form>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button >{{ 'shared.buttons.cancel' | translate}}</button>
+            <button mat-raised-button color="primary" (click)="onUpdateClick();">{{ 'shared.buttons.update' | translate}}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

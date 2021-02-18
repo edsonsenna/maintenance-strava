@@ -38,6 +38,13 @@
 
         }
     },
+    "user": {
+        "detail": {
+            "form": {
+                "title": "My Info"
+            }
+        }
+    },
     "shared": {
         "app": {
             "name": "Maintenances Strava",
@@ -68,10 +75,15 @@
                 }
             },
             "maintenanceDate": "Change Date",
-            "name": "Name"
+            "name": "Name",
+            "birthdate": "Birthdate",
+            "email": "Email"
         },
         "placeholders": {
-            "maintenanceName": "Ex. Chain Change"
+            "maintenanceName": "Ex. Chain Change",
+            "name": "John McMurry",
+            "birthdate": "04/11/1997",
+            "email": "johnmc@mail.com"
         },
         "errors": {
             "required": "*Required field.",

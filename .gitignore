@@ -48,3 +48,5 @@ Thumbs.db
 /src/firebaseconfig.json
 /src/stravaconfig.json
 .env
+/cypress/videos
+/cypress/screenshots
