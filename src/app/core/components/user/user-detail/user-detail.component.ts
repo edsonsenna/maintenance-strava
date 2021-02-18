@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '@interfaces/user';
+import { UserDetails } from '@enums/user-details';
+import { UserDetail } from '@interfaces/user-detail';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'ms-user-detail',
@@ -11,11 +13,12 @@ import { User } from '@interfaces/user';
 export class UserDetailComponent implements OnInit {
 
   private _userForm: FormGroup = null;
-  private _userDetail: User = null;
+  private _userDetail: UserDetail = null;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
+    private _userService:UserService,
   ) { }
 
   ngOnInit(): void {
@@ -31,17 +34,16 @@ export class UserDetailComponent implements OnInit {
   createReactiveForm() {
 
     this._userForm = this._formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(128)]], 
-      email: ['', [Validators.required, Validators.email]],
-      birthday: [Date.now, [Validators.required, Validators.nullValidator]] 
+      name: [this._userDetail[UserDetails.FULLNAME_KEY], [Validators.required, Validators.minLength(2), Validators.maxLength(128)]], 
+      email: [this._userDetail[UserDetails.EMAIL_KEY], [Validators.required, Validators.email]],
+      birthday: [this._userDetail[UserDetails.BIRTHDAY_KEY] || Date.now(), [Validators.required, Validators.nullValidator]] 
     });
 
   }
 
-  onUpdateClick() {
-
+  async onUpdateClick() {
     console.log(this.form.getRawValue());
-
+    // TODO - Use use service to update user details on firebase
   }
 
   get form() {
