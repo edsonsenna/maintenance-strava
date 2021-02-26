@@ -1,7 +1,6 @@
 import { Athlete } from './athlete';
 
 export interface User {
-    _uid?: String;
     athlete?: Athlete;
     created?: Date;
     update?: Date;

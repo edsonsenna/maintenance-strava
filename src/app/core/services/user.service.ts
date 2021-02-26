@@ -39,12 +39,12 @@ export class UserService {
     return user;
   }
 
-  async updateUser(user: UserDetail): Promise<boolean> {
+  async updateUser(userId: String, userInfo: User): Promise<boolean> {
     return await this._firestore
       .collection(COLLECTION_USERS)
-      .doc(`${user['ms-ath-info']}`)
+      .doc(`${userId}`)
       .update({
-        bikes: [],
+        ...userInfo
       })
       .then(() => true)
       .catch(() => false);

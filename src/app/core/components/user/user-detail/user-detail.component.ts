@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserDetails } from '@enums/user-details';
-import { UserDetail } from '@interfaces/user-detail';
+import { User } from '@interfaces/user';
+import { TokenService } from '@services/token.service';
 import { UserService } from '@services/user.service';
 
 @Component({
@@ -13,11 +13,12 @@ import { UserService } from '@services/user.service';
 export class UserDetailComponent implements OnInit {
 
   private _userForm: FormGroup = null;
-  private _userDetail: UserDetail = null;
+  private _user: User = null;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
+    private _tokenService: TokenService,
     private _userService:UserService,
   ) { }
 
@@ -27,22 +28,27 @@ export class UserDetailComponent implements OnInit {
   }
 
   receiveUserDetail() {
-    this._userDetail = this._route?.snapshot?.data?.userDetail || null;
-    console.log(this._userDetail);
+    this._user = this._route?.snapshot?.data?.userDetail || null;
+    console.log(this._user);
   }
 
   createReactiveForm() {
 
     this._userForm = this._formBuilder.group({
-      name: [this._userDetail[UserDetails.FULLNAME_KEY], [Validators.required, Validators.minLength(2), Validators.maxLength(128)]], 
-      email: [this._userDetail[UserDetails.EMAIL_KEY], [Validators.required, Validators.email]],
-      birthday: [this._userDetail[UserDetails.BIRTHDAY_KEY] || Date.now(), [Validators.required, Validators.nullValidator]] 
+      name: [this._user.fullname, [Validators.required, Validators.minLength(2), Validators.maxLength(128)]], 
+      email: [this._user.email, [Validators.required, Validators.email]],
+      birthdate: [this._user.birthdate || Date.now(), [Validators.required, Validators.nullValidator]] 
     });
 
   }
 
   async onUpdateClick() {
     console.log(this.form.getRawValue());
+    if(this.form.valid) {
+      return this._userService.updateUser(this._tokenService.userId, this.form.getRawValue());
+    }
+
+    this.form.markAllAsTouched();
     // TODO - Use use service to update user details on firebase
   }
 

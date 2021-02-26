@@ -23,7 +23,7 @@
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>{{ 'shared.inputTitles.birthdate' | translate}}</mat-label>
                     <input matInput [matDatepicker]="birthdatePicker" (click)="birthdatePicker.open()"
-                    id="birthday" formControlName="birthday">
+                    id="birthday" formControlName="birthdate">
                     <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
                     <mat-datepicker touchUi #birthdatePicker></mat-datepicker>
                   </mat-form-field>
