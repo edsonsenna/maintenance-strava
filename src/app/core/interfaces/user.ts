@@ -6,7 +6,7 @@ export interface User {
     update?: Date;
     email?: String;
     fullname?: String;
-    birthdate?: Number;
+    birthdate?: Date;
     expirationDate?: Number;
     refreshToken?: String;
     token?: String;

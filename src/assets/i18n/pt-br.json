@@ -42,6 +42,9 @@
         "detail": {
             "form": {
                 "title": "Minhas Informações"
+            },
+            "update": {
+                "success": "Informações atualizadas com sucesso."
             }
         }
     },
@@ -88,7 +91,8 @@
             "required": "*Campo obrigatório.",
             "login": "Erro ao realizar login via Strava. Tente novamente.",
             "invalidScope": "Escopo inválido fornecido. Tente novamente.",
-            "empty": "Não existem items cadastrados."
+            "empty": "Não existem items cadastrados.",
+            "problemToUpdate": "Erro ao realizar processo de atualização. Tente novamente."
         },
         "question": {
             "cancel": {

@@ -42,6 +42,9 @@
         "detail": {
             "form": {
                 "title": "My Info"
+            },
+            "update": {
+                "success": "User info successfully updated."
             }
         }
     },
@@ -89,7 +92,8 @@
             "required": "*Required field.",
             "login": "Error trying to do login via Strava. Try again.",
             "invalidScope": "Invalid scope provided. Try again.",
-            "empty": "None records founded."
+            "empty": "None records founded.",
+            "problemToUpdate": "Error while trying to run update process. Try again."
         },
         "question": {
             "cancel": {
