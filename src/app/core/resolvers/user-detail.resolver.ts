@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  Resolve,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { User } from '../interfaces/user';
-import { TokenService } from '../services/token.service';
-import { UserService } from '../services/user.service';
+import { User } from '@interfaces/user';
+import { TokenService } from '@services/token.service';
+import { UserService } from '@services/user.service';
 
 @Injectable({
   providedIn: 'root'
