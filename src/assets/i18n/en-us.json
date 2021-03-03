@@ -93,7 +93,9 @@
             "login": "Error trying to do login via Strava. Try again.",
             "invalidScope": "Invalid scope provided. Try again.",
             "empty": "None records founded.",
-            "problemToUpdate": "Error while trying to run update process. Try again."
+            "problemToUpdate": "Error while trying to run update process. Try again.",
+            "minLength": "Minimum of {{ size }} characters.",
+            "maxLength": "Maximum of {{ size }} characters."
         },
         "question": {
             "cancel": {

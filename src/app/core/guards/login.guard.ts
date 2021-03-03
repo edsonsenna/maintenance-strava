@@ -24,11 +24,7 @@ import { AthleteStrava } from '@interfaces/athlete-strava';
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
-  private user: User = {
-    email: '',
-    fullname: '',
-    birthdate: null,
-  };
+  private user: User = {};
   constructor(
     private _stravaService: StravaService,
     private _tokenService: TokenService,
@@ -80,8 +76,8 @@ export class LoginGuard implements CanActivate {
               (response: TokenResponse) => {
                 if (response?.access_token) {
                   const infoToBeAdd = this.parseResponse(response);
-                  this.user.fullname =
-                    this.user.fullname ||
+                  this.user.name =
+                    this.user.name ??
                     `${infoToBeAdd.athlete.firstname} ${infoToBeAdd.athlete.lastname}`;
                   this._firestore
                     .collection(Collections.USERS)
@@ -113,6 +109,21 @@ export class LoginGuard implements CanActivate {
 
   async getUserToken(userCode: string, scope: string) {
     let athlete = null;
+
+    await this._firestore
+      .collection(Collections.USERS)
+      .doc(`${this._tokenService.userId}`)
+      .get()
+      .pipe(
+        tap((doc) => {
+          if (doc.exists) {
+            const userInfo: User = doc.data();
+            this.user = { ...this.user, ...userInfo };
+          }
+        })
+      )
+      .toPromise();
+
     if (userCode) {
       const receiveTokenReponse = {
         next: (response: TokenResponse) => {
@@ -122,14 +133,14 @@ export class LoginGuard implements CanActivate {
           if (response.athlete) {
             athlete = response.athlete;
             const infoToBeAdd = this.parseResponse(response);
-            this.user.fullname =
-              this.user.fullname ||
+            this.user.name =
+              this.user.name ??
               `${infoToBeAdd.athlete.firstname} ${infoToBeAdd.athlete.lastname}`;
             console.log(this.user);
             this._firestore
               .collection(Collections.USERS)
               .doc(`${athlete.id}`)
-              .set({
+              .update({
                 ...infoToBeAdd,
                 ...this.user,
               });

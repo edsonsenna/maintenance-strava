@@ -29,21 +29,20 @@ export class UserDetailComponent implements OnInit {
   }
 
   receiveUserDetail(): void {
-    this._user = this._route?.snapshot?.data?.userDetail || null;
-    console.log(this._user);
+    this._user = this._route?.snapshot?.data?.userDetail ?? null;
   }
 
   createReactiveForm(): void {
     this._userForm = this._formBuilder.group({
       name: [
-        this._user.fullname,
+        this._user.name ?? '',
         [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(128),
         ],
       ],
-      email: [this._user.email, [Validators.required, Validators.email]],
+      email: [this._user.email ?? '', [Validators.required, Validators.email]],
       birthdate: [
         this._user.birthdate ? new Date(this._user.birthdate) : new Date(),
         [Validators.required, Validators.nullValidator],
@@ -63,11 +62,9 @@ export class UserDetailComponent implements OnInit {
             false
           );
           return true;
-        }
-        ).catch(() => {
-          this._notificationService.showNotification(
-            'problemToUpdate',
-          );
+        })
+        .catch(() => {
+          this._notificationService.showNotification('problemToUpdate');
           return false;
         });
     }
@@ -78,5 +75,17 @@ export class UserDetailComponent implements OnInit {
 
   get form() {
     return this._userForm;
+  }
+
+  get name() {
+    return this.form?.get('name');
+  }
+
+  get email() {
+    return this.form?.get('email');
+  }
+
+  get birthdate() {
+    return this.form?.get('birthdate');
   }
 }

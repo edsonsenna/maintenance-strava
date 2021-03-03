@@ -92,7 +92,9 @@
             "login": "Erro ao realizar login via Strava. Tente novamente.",
             "invalidScope": "Escopo inválido fornecido. Tente novamente.",
             "empty": "Não existem items cadastrados.",
-            "problemToUpdate": "Erro ao realizar processo de atualização. Tente novamente."
+            "problemToUpdate": "Erro ao realizar processo de atualização. Tente novamente.",
+            "minLength": "Mínimo de {{ size }} caracteres.",
+            "maxLength": "Máximo de {{ size }} caracteres."
         },
         "question": {
             "cancel": {
