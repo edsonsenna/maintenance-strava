@@ -70,6 +70,7 @@ const providers = [
 export class AppModule {
   constructor(private translateService: TranslateService) {
     // TODO: Get user client language as default language 
+    // console.log('BuildingEnv', environment);
     translateService.setDefaultLang('pt-br');
     translateService.use('pt-br');
   }
