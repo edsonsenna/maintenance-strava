@@ -1,7 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
-uses: w9jds/firebase-action@v2.0.0
+name: CI Firebase Deploy
 
 # Controls when the action will run. 
 on:
