@@ -68,7 +68,6 @@ export class LoginGuard implements CanActivate {
         .toPromise();
 
       if (refreshToken) {
-        console.log(this.user);
         await this._stravaService
           .getAuthTokenByRefresh(refreshToken)
           .pipe(
@@ -110,20 +109,6 @@ export class LoginGuard implements CanActivate {
   async getUserToken(userCode: string, scope: string) {
     let athlete = null;
 
-    await this._firestore
-      .collection(Collections.USERS)
-      .doc(`${this._tokenService.userId}`)
-      .get()
-      .pipe(
-        tap((doc) => {
-          if (doc.exists) {
-            const userInfo: User = doc.data();
-            this.user = { ...this.user, ...userInfo };
-          }
-        })
-      )
-      .toPromise();
-
     if (userCode) {
       const receiveTokenReponse = {
         next: (response: TokenResponse) => {
@@ -136,13 +121,18 @@ export class LoginGuard implements CanActivate {
             this.user.name =
               this.user.name ??
               `${infoToBeAdd.athlete.firstname} ${infoToBeAdd.athlete.lastname}`;
-            console.log(this.user);
             this._firestore
               .collection(Collections.USERS)
               .doc(`${athlete.id}`)
-              .update({
-                ...infoToBeAdd,
-                ...this.user,
+              .get()
+              .toPromise()
+              .then(async (doc) => {
+                const userInfo: User = doc.data();
+                this.user = { ...this.user, ...userInfo };
+                return doc.ref.set({
+                  ...infoToBeAdd,
+                  ...this.user,
+                });
               });
           }
           this._tokenService.save(response);
