@@ -63,7 +63,9 @@
             "login": "Entrar com Strava",
             "yes": "Sim",
             "no": "Não",
-            "close": "Fechar"
+            "close": "Fechar",
+            "clickHere": "Clique aqui.",
+            "clickToRegister": "Clique aqui para cadastrar."
         },
         "inputTitles": {
             "bikes": "Bicicletas",
@@ -94,7 +96,8 @@
             "empty": "Não existem items cadastrados.",
             "problemToUpdate": "Erro ao realizar processo de atualização. Tente novamente.",
             "minLength": "Mínimo de {{ size }} caracteres.",
-            "maxLength": "Máximo de {{ size }} caracteres."
+            "maxLength": "Máximo de {{ size }} caracteres.",
+            "emailNotFound": "Informe seu e-mail para receber alertas sobre suas manutenções."
         },
         "question": {
             "cancel": {

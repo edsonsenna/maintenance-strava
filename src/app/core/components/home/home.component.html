@@ -1,28 +1,53 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
-    <mat-toolbar color="primary" class="toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <h1 class="app-name">{{'shared.app.welcome' | translate }}{{ (this.userFirstName ? ', '+this.userFirstName: '!') }}</h1>
-    </mat-toolbar>
-    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav #snav mode="over" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-            <mat-nav-list>
-                <a mat-list-item *ngFor="let option of menuOptions" [routerLink]="option.path"
-                    (click)="snav.close()">{{ 'menuOptions.'+option.name | translate }}</a>
-                <a mat-list-item
-                    (click)="exit()">{{ 'menuOptions.exit' | translate }}</a>
-            </mat-nav-list>
-        </mat-sidenav>
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name">
+      {{ "shared.app.welcome" | translate
+      }}{{ this.userFirstName ? ", " + this.userFirstName : "!" }}
+    </h1>
+  </mat-toolbar>
+  <mat-sidenav-container
+    class="sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      mode="over"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <a
+          mat-list-item
+          *ngFor="let option of menuOptions"
+          [routerLink]="option.path"
+          (click)="snav.close()"
+          >{{ "menuOptions." + option.name | translate }}</a
+        >
+        <a mat-list-item (click)="exit()">{{
+          "menuOptions.exit" | translate
+        }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
 
-        <mat-sidenav-content>
-            <div class="loader" *ngIf="isLoader">
-                <div class="spinner">
-                    <mat-spinner></mat-spinner>
-                </div>
-                <div class="message">{{ 'shared.app.loading' | translate }}</div>
-            </div>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+    <mat-sidenav-content [ngClass]="{ 'email-not-found': this.shouldDisplayEmailNotFoundContainer }">
+      <div class="loader" *ngIf="isLoader">
+        <div class="spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div class="message">{{ "shared.app.loading" | translate }}</div>
+      </div>
+      <div class="email-not-found-container" *ngIf="this.shouldDisplayEmailNotFoundContainer">
+        <span
+          >{{ "shared.errors.emailNotFound" | translate }}
+          <a [routerLink]="userInfoRoute">{{
+            "shared.buttons.clickToRegister" | translate
+          }}</a></span
+        >
+      </div>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

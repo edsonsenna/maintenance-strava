@@ -15,6 +15,7 @@
       "@enums/*": ["src/app/core/enums/*"],
       "@interfaces/*": ["src/app/core/interfaces/*"],
       "@services/*": ["src/app/core/services/*"],
+      "@routes/*": ["src/app/core/routes/*"],
     },
     "lib": [
       "es2018",

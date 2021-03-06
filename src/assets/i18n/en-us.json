@@ -63,7 +63,9 @@
             "login": "Login with Strava",
             "yes": "Yes",
             "no": "No",
-            "close": "Close"
+            "close": "Close",
+            "clickHere": "Click here.",
+            "clickToRegister": "Click here to register."
         },
         "inputTitles": {
             "bikes": "Bikes",
@@ -95,7 +97,8 @@
             "empty": "None records founded.",
             "problemToUpdate": "Error while trying to run update process. Try again.",
             "minLength": "Minimum of {{ size }} characters.",
-            "maxLength": "Maximum of {{ size }} characters."
+            "maxLength": "Maximum of {{ size }} characters.",
+            "emailNotFound": "Register your e-mail to receive alerts about your maintenances."
         },
         "question": {
             "cancel": {
