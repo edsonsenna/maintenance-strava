@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { User } from '../interfaces/user';
+import { User } from '@interfaces/user';
+import { UserDetail } from '@interfaces/user-detail';
 
 const COLLECTION_USERS = 'users';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(private _firestore: AngularFirestore) {}
 
@@ -27,7 +28,7 @@ export class UserService {
   async findUserById(userId: string): Promise<User> {
     let user: User = await this._firestore
       .collection(COLLECTION_USERS)
-      .doc(userId)
+      .doc(`${userId}`)
       .get()
       .toPromise()
       .then((doc) => (doc.exists ? <User>doc.data() : null))
@@ -38,12 +39,12 @@ export class UserService {
     return user;
   }
 
-  async updateUser(userId: string, bikes: []): Promise<boolean> {
+  async updateUser(userId: String, userInfo: User): Promise<boolean> {
     return await this._firestore
       .collection(COLLECTION_USERS)
       .doc(`${userId}`)
       .update({
-        bikes: bikes,
+        ...userInfo
       })
       .then(() => true)
       .catch(() => false);

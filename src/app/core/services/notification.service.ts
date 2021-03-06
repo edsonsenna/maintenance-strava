@@ -12,14 +12,15 @@ export class NotificationService {
     private _translateService: TranslateService
   ) {}
 
-  async showNotification(notification: string) {
+  async showNotification(notificationMessage: string, isShared: boolean = true) {
+    const prefix = isShared ? 'shared.errors.' : '';
+    const messageKey = `${prefix}${notificationMessage}`;
     this._translateService
-      .get(['shared.errors.'+notification, 'shared.buttons.close'])
+      .get([messageKey, 'shared.buttons.close'])
       .subscribe((translated) => {
-        const message = translated['shared.errors.'+notification];
+        const message = translated[messageKey];
         const action = translated['shared.buttons.close'];
-        this._snackBar.open(message, action, {duration: 30000});
-
-      })
+        this._snackBar.open(message, action, {duration: 5000});
+      });
   }
 }

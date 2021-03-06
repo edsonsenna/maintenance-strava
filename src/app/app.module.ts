@@ -16,6 +16,7 @@ import { MaintenanceModule } from './core/components/maintenance/maintenance.mod
 import { HttpLoaderFactory } from './core/loaders/http-i18n-loader';
 import { LoginModule } from './core/components/login/login.module';
 import { QuestionDialogComponent } from './core/components/question-dialog/question-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 const declarations = [
   AppComponent,
@@ -51,7 +52,8 @@ const providers = [
     provide: HTTP_INTERCEPTORS,
     useClass: HttpIntercept,
     multi: true,
-  }
+  },
+  {provide: MAT_DATE_LOCALE, useValue: 'pt'},
 ]
 
 @NgModule({
@@ -68,6 +70,7 @@ const providers = [
 export class AppModule {
   constructor(private translateService: TranslateService) {
     // TODO: Get user client language as default language 
+    // console.log('BuildingEnv', environment);
     translateService.setDefaultLang('pt-br');
     translateService.use('pt-br');
   }

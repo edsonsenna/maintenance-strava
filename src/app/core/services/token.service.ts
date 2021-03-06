@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { TokenValues } from '../enums/token-values';
-import { TokenResponse } from '../interfaces/token-response';
+import { TokenValues } from '@enums/token-values';
+import { TokenResponse } from '@interfaces/token-response';
 
 @Injectable({
     providedIn: 'root'

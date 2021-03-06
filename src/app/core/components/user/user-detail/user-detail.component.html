@@ -12,20 +12,25 @@
                     <mat-label>{{ 'shared.inputTitles.name' | translate }}</mat-label>
                     <input matInput [placeholder]="('shared.placeholders.name' | translate)" 
                     formControlName="name" id="name">
+                    <mat-error *ngIf="this.name?.errors?.required">{{'shared.errors.required' | translate }}</mat-error>
+                    <mat-error *ngIf="this.name?.errors?.minlength">{{'shared.errors.minLength' | translate:{ size: 2} }}</mat-error>
+                    <mat-error *ngIf="this.name?.errors?.maxlength">{{'shared.errors.maxLength' | translate: { size: 128} }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>{{ 'shared.inputTitles.email' | translate }}</mat-label>
                     <input matInput [placeholder]="('shared.placeholders.email' | translate)"
                     id="email" formControlName="email">
+                    <mat-error *ngIf="this.email?.errors?.required">{{'shared.errors.required' | translate }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>{{ 'shared.inputTitles.birthdate' | translate}}</mat-label>
                     <input matInput [matDatepicker]="birthdatePicker" (click)="birthdatePicker.open()"
-                    id="birthday" formControlName="birthday">
+                    id="birthday" formControlName="birthdate">
                     <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi #birthdatePicker></mat-datepicker>
+                    <mat-datepicker touchUi #birthdatePicker ></mat-datepicker>
+                    <mat-error *ngIf="this.birthdate?.errors?.required">{{'shared.errors.required' | translate }}</mat-error>
                   </mat-form-field>
                 
             </form>

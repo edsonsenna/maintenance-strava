@@ -1,8 +1,8 @@
-import { Athlete } from './athlete';
+import { AthleteStrava } from './athlete-strava';
 
 export interface TokenResponse {
     "access_token": string;
-    "athlete": Athlete;
+    "athlete": AthleteStrava;
     "expires_at": number;
     "expires_in": number;
     "refresh_token": string;

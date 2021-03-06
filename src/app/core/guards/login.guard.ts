@@ -9,17 +9,22 @@ import {
 import { AngularFirestore } from '@angular/fire/firestore';
 import { tap } from 'rxjs/operators';
 
-import { TokenService } from '../services/token.service';
-import { TokenResponse } from '../interfaces/token-response';
-import { TokenValues } from '../enums/token-values';
-import { StravaService } from '../services/strava.service';
-import { Collections } from '../enums/collections';
-import { NotificationService } from '../services/notification.service';
+import { TokenService } from '@services/token.service';
+import { TokenResponse } from '@interfaces/token-response';
+import { TokenValues } from '@enums/token-values';
+import { StravaService } from '@services/strava.service';
+import { Collections } from '@enums/collections';
+import { NotificationService } from '@services/notification.service';
+import { User } from '@interfaces/user';
+import { UserDetails } from '@enums/user-details';
+import { Athlete } from '@interfaces/athlete';
+import { AthleteStrava } from '@interfaces/athlete-strava';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
+  private user: User = {};
   constructor(
     private _stravaService: StravaService,
     private _tokenService: TokenService,
@@ -34,14 +39,16 @@ export class LoginGuard implements CanActivate {
   ): Promise<boolean | UrlTree> {
     if (Object.keys(next.queryParams).length) {
       let isInvalid = false;
-      if(next?.queryParams?.error) {
+      if (next?.queryParams?.error) {
         this._notificationService.showNotification('login');
         isInvalid = true;
-      } else if(next?.queryParams?.scope != 'read,activity:read_all,profile:read_all') {
+      } else if (
+        next?.queryParams?.scope != 'read,activity:read_all,profile:read_all'
+      ) {
         this._notificationService.showNotification('invalidScope');
         isInvalid = true;
       }
-      if(isInvalid) return this._router.createUrlTree(['/login']);
+      if (isInvalid) return this._router.createUrlTree(['/login']);
       await this.getUserToken(next.queryParams?.code, next.queryParams?.scope);
     } else if (!this._tokenService.isTokenValid && this._tokenService.userId) {
       let refreshToken = null;
@@ -52,14 +59,16 @@ export class LoginGuard implements CanActivate {
         .pipe(
           tap((doc) => {
             if (doc.exists) {
-              const data = doc.data();
-              refreshToken = data[TokenValues.REFRESH_KEY];
+              const userInfo: User = doc.data();
+              refreshToken = userInfo.refreshToken;
+              this.user = { ...this.user, ...userInfo };
             }
           })
         )
         .toPromise();
 
       if (refreshToken) {
+        console.log(this.user);
         await this._stravaService
           .getAuthTokenByRefresh(refreshToken)
           .pipe(
@@ -67,11 +76,15 @@ export class LoginGuard implements CanActivate {
               (response: TokenResponse) => {
                 if (response?.access_token) {
                   const infoToBeAdd = this.parseResponse(response);
+                  this.user.name =
+                    this.user.name ??
+                    `${infoToBeAdd.athlete.firstname} ${infoToBeAdd.athlete.lastname}`;
                   this._firestore
                     .collection(Collections.USERS)
                     .doc(`${this._tokenService.userId}`)
                     .update({
                       ...infoToBeAdd,
+                      ...this.user,
                     });
                   this._tokenService.save(response);
                 }
@@ -84,8 +97,8 @@ export class LoginGuard implements CanActivate {
             )
           )
           .toPromise()
-          .then((response) => true)
-          .catch((error) => false);
+          .then(() => true)
+          .catch(() => false);
       }
     }
 
@@ -96,6 +109,21 @@ export class LoginGuard implements CanActivate {
 
   async getUserToken(userCode: string, scope: string) {
     let athlete = null;
+
+    await this._firestore
+      .collection(Collections.USERS)
+      .doc(`${this._tokenService.userId}`)
+      .get()
+      .pipe(
+        tap((doc) => {
+          if (doc.exists) {
+            const userInfo: User = doc.data();
+            this.user = { ...this.user, ...userInfo };
+          }
+        })
+      )
+      .toPromise();
+
     if (userCode) {
       const receiveTokenReponse = {
         next: (response: TokenResponse) => {
@@ -105,11 +133,16 @@ export class LoginGuard implements CanActivate {
           if (response.athlete) {
             athlete = response.athlete;
             const infoToBeAdd = this.parseResponse(response);
+            this.user.name =
+              this.user.name ??
+              `${infoToBeAdd.athlete.firstname} ${infoToBeAdd.athlete.lastname}`;
+            console.log(this.user);
             this._firestore
               .collection(Collections.USERS)
               .doc(`${athlete.id}`)
-              .set({
+              .update({
                 ...infoToBeAdd,
+                ...this.user,
               });
           }
           this._tokenService.save(response);
@@ -127,19 +160,34 @@ export class LoginGuard implements CanActivate {
   }
 
   parseResponse(response: TokenResponse) {
-    const info = {};
+    const info: User = {};
     if (response?.access_token) {
-      info[TokenValues.TOKEN_KEY] = response?.access_token;
+      info.token = response?.access_token;
     }
     if (response?.athlete) {
-      info[TokenValues.ATHLETE_INFO_KEY] = response?.athlete;
+      info.athlete = this.parseAthleteStravaObj(response.athlete);
     }
     if (response?.expires_at) {
-      info[TokenValues.EXP_DATE_KEY] = response?.expires_at;
+      info.expirationDate = response.expires_at;
     }
     if (response?.refresh_token) {
-      info[TokenValues.REFRESH_KEY] = response?.refresh_token;
+      info.refreshToken = response.refresh_token;
     }
     return info;
   }
+
+  parseAthleteStravaObj(athleteStravaObj: AthleteStrava): Athlete {
+    const keys = Object.keys(athleteStravaObj);
+    const parsedObject = keys.reduce((accumulator, currentKey) => {
+      const camelCaseKey = this.snakeToCamel(currentKey);
+      accumulator[camelCaseKey] = athleteStravaObj[currentKey];
+      return accumulator;
+    }, {});
+    return parsedObject;
+  }
+
+  snakeToCamel = (str: string): string =>
+    str.replace(/([-_][a-z])/g, (group) =>
+      group.toUpperCase().replace('-', '').replace('_', '')
+    );
 }
