@@ -14,3 +14,7 @@
 .full-width {
     width: 100%;
 }
+
+.mat-slide-toggle{
+    margin-bottom: 1.5em;
+}

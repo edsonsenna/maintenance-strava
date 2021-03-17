@@ -5,7 +5,7 @@
                 {{ 'user.detail.form.title' | translate }}
             </div>
         </mat-card-title>
-        <mat-card-content *ngIf="form">
+        <mat-card-content *ngIf="this.form">
             <form [formGroup]="this.form">
                
                 <mat-form-field appearance="outline" class="full-width">
@@ -23,6 +23,9 @@
                     id="email" formControlName="email">
                     <mat-error *ngIf="this.email?.errors?.required">{{'shared.errors.required' | translate }}</mat-error>
                 </mat-form-field>
+
+                <mat-slide-toggle color="warn" formControlName="emailAlerts" id="emailAlerts">{{ 'shared.inputTitles.emailAlerts' | translate }} </mat-slide-toggle>
+                
 
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>{{ 'shared.inputTitles.birthdate' | translate}}</mat-label>
