@@ -11,6 +11,10 @@ mat-sidenav {
   padding-top: 50px;
 };
 
+.mat-sidenav-container {
+  min-height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,7 @@ mat-sidenav {
   bottom: 0;
   left: 0;
   right: 0;
+  min-height: 100vh;
 }
 
 .is-mobile .toolbar {
