@@ -81,7 +81,8 @@
             },
             "name": "Nome",
             "birthdate": "Data de Nascimento",
-            "email": "Email"
+            "email": "Email",
+            "emailAlerts": "Alertas por email"
         },
         "placeholders": {
             "maintenanceName": "Ex. Troca da Corrente",

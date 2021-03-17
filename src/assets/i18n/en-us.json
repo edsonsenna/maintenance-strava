@@ -82,7 +82,8 @@
             "maintenanceDate": "Change Date",
             "name": "Name",
             "birthdate": "Birthdate",
-            "email": "Email"
+            "email": "Email",
+            "emailAlerts": "Email alerts"
         },
         "placeholders": {
             "maintenanceName": "Ex. Chain Change",

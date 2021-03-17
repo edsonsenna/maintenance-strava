@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+    --main-background-color: #ee5536;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary, mat-toolbar.mat-primary { background-color: #ee5536 !important;}
-.mat-progress-spinner circle, .mat-spinner circle { stroke: #ee5536 !important;}
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary, mat-toolbar.mat-primary { background-color: var(--main-background-color) !important;}
+.mat-progress-spinner circle, .mat-spinner circle { stroke: var(--main-background-color) !important;}
+.mat-slide-toggle.mat-warn.mat-checked.mat-slide-toggle-bar { background-color: #cc6450bd !important;}
+.mat-slide-toggle.mat-warn.mat-checked .mat-slide-toggle-thumb { background-color: var(--main-background-color) !important;}

@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgModule } from '@angular/core';
 
 const declarations = [
@@ -37,6 +38,7 @@ const imports = [
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatToolbarModule,
 ];

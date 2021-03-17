@@ -5,7 +5,6 @@ import { User } from '@interfaces/user';
 import { NotificationService } from '@services/notification.service';
 import { TokenService } from '@services/token.service';
 import { UserService } from '@services/user.service';
-
 @Component({
   selector: 'ms-user-detail',
   templateUrl: './user-detail.component.html',
@@ -43,6 +42,7 @@ export class UserDetailComponent implements OnInit {
         ],
       ],
       email: [this._user.email ?? '', [Validators.required, Validators.email]],
+      emailAlerts: [this._user.emailAlerts ?? true, [Validators.required]],
       birthdate: [
         this._user.birthdate ? new Date(this._user.birthdate) : new Date(),
         [Validators.required, Validators.nullValidator],
@@ -83,6 +83,10 @@ export class UserDetailComponent implements OnInit {
 
   get email() {
     return this.form?.get('email');
+  }
+
+  get emailAlerts() {
+    return this.form?.get('emailAlerts');
   }
 
   get birthdate() {
