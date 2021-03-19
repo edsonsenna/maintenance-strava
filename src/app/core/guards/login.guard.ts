@@ -130,8 +130,8 @@ export class LoginGuard implements CanActivate {
                 const userInfo: User = doc.data();
                 this.user = { ...this.user, ...userInfo };
                 return doc.ref.set({
-                  ...infoToBeAdd,
                   ...this.user,
+                  ...infoToBeAdd,
                 });
               });
           }
